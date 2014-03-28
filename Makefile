@@ -7,7 +7,7 @@
 #
 
 CXX = g++
-CXXFLAGS = -Wall -g
+CXXFLAGS = -g -Wall
 LIBS = -lncurses
 
 
@@ -16,7 +16,7 @@ DEPS = $(MY_DEPS) Actor.hpp GameManager.hpp GraphMap.hpp OtherActors.hpp Pursuer
 
 
 MY_OBJ = 
-OBJ = $(MY_OBJ) Actor.o GameManager.o GraphMap.o OtherActors.o Pursuer.o
+OBJ = $(MY_OBJ) Actor.o GameManager.o GraphMap.o OtherActors.o Pursuer.o ssbros.o
 
 
 .PHONY : all clean tarball
@@ -29,7 +29,7 @@ all : ssbros
 	$(CXX) -c $(CXXFLAGS) -o $@ $<
 
 ssbros : $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(LIBS)
 
 
 # 2. This will clean out any non-source files from the directory
