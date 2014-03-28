@@ -11,11 +11,11 @@ CXXFLAGS = -g -Wall
 LIBS = -lncurses
 
 
-MY_DEPS = 
+MY_DEPS = SimpleHero.hpp
 DEPS = $(MY_DEPS) Actor.hpp GameManager.hpp GraphMap.hpp OtherActors.hpp Pursuer.hpp
 
 
-MY_OBJ = 
+MY_OBJ = SimpleHero.o
 OBJ = $(MY_OBJ) Actor.o GameManager.o GraphMap.o OtherActors.o Pursuer.o ssbros.o
 
 
