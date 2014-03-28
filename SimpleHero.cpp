@@ -17,7 +17,7 @@ SimpleHero::~SimpleHero() {
 
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// TODO: Select the next move that the SimpleHero is going to make.
-	return 0; // TODO: Return the direction that the SimpleHero is going to go.
+	return 1; // TODO: Return the direction that the SimpleHero is going to go.
 }
 
 Actor* SimpleHero::duplicate() {
