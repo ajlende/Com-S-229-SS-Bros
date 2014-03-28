@@ -1,27 +1,44 @@
+# Makefile for the Super Stolee Bros program
+# 
+#   Contents:
+#    1. Default make command
+#    2. clean command
+#    3. tarball command
+#
+
+CXX = g++
+CXXFLAGS = -Wall -g
+LIBS = -lncurses
 
 
+MY_DEPS = 
+DEPS = $(MY_DEPS) Actor.hpp GameManager.hpp GraphMap.hpp OtherActors.hpp Pursuer.hpp
 
+
+MY_OBJ = 
+OBJ = $(MY_OBJ) Actor.o GameManager.o GraphMap.o OtherActors.o Pursuer.o
+
+
+.PHONY : all clean tarball
+
+
+# 1. Default make command to compile all the files
 all : ssbros
 
+%.o : %.cpp $(DEPS)
+	$(CXX) -c $(CXXFLAGS) -o $@ $<
 
-objects : 
-	g++ -g -c GameManager.cpp
-	g++ -g -c Pursuer.cpp
-	g++ -g -c OtherActors.cpp
-	g++ -g -c GraphMap.cpp
-	g++ -g -c Actor.cpp
+ssbros : $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
-ssbros : ssbros.cpp OtherActors.o
-	g++ -g -Wall -o ssbros ssbros.cpp Actor.o GraphMap.o GameManager.o OtherActors.o Pursuer.o -lncurses
 
-OtherActors.o: OtherActors.cpp
-	g++ -g -Wall -c OtherActors.cpp
+# 2. This will clean out any non-source files from the directory
+clean :
+	rm -f ssbros $(MY_OBJ)
 
-# Modify the clean target to remove YOUR .o files...
-clean:
-	rm ssbros OtherActors.o
 
-tarball:
-	make clean
-	tar czf project2.tar.gz Makefile *.hpp ssbros.cpp OtherActors.cpp *.o maps/*.txt README
+# 3. This will clean the project, and then make a tarball from the files for submission
+tarball :
+	rm -f ssbros $(MY_OBJ) # This ensures that nothing from MY_OBJ is in the submission
+	tar czf ajlende.tar.gz README Makefile *.cpp *.hpp *.o
 
