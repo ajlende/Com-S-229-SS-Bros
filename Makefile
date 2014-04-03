@@ -7,7 +7,7 @@
 #
 
 CXX = g++
-CXXFLAGS = -g -Wall
+CXXFLAGS = -g -Wall -std=c++11
 LIBS = -lncurses
 
 
