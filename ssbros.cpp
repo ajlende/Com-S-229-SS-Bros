@@ -17,7 +17,7 @@ int main( int argc, char** argv )
 
 	int num_actors = 1;
 
-	actors[0] = new SimpleHero();
+	actors[0] = new SimpleHero(ACTOR_HERO);
 
 	GameManager* manager = new GameManager(argc, argv, actors, num_actors);
 	manager->addActor(new Actor(ACTOR_HERO));
