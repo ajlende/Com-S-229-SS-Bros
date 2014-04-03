@@ -9,6 +9,7 @@
 #include "GameManager.hpp"
 #include "Actor.hpp"
 #include "OtherActors.hpp"
+#include "SimpleHero.hpp"
 #include <stdlib.h>
 
 int main( int argc, char** argv )
@@ -16,7 +17,6 @@ int main( int argc, char** argv )
 	Actor** actors = (Actor**) malloc(10 * sizeof(Actor*));
 
 	int num_actors = 1;
-
 	actors[0] = new SimpleHero(ACTOR_HERO);
 
 	GameManager* manager = new GameManager(argc, argv, actors, num_actors);
