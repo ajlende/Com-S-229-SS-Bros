@@ -15,6 +15,7 @@
 class SimpleHero : public Actor
 {
 	protected:
+		void BFS(int s);
 		
 	public:
 		SimpleHero(int type);
