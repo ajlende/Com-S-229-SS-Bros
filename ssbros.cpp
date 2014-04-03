@@ -15,7 +15,9 @@ int main( int argc, char** argv )
 {
 	Actor** actors = (Actor**) malloc(10 * sizeof(Actor*));
 
-	int num_actors = 0;
+	int num_actors = 1;
+
+	actors[0] = new SimpleHero();
 
 	GameManager* manager = new GameManager(argc, argv, actors, num_actors);
 	manager->addActor(new Actor(ACTOR_HERO));
