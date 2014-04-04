@@ -15,6 +15,16 @@ SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
 }
 
+void SimpleHero::BFS(int s) {
+	// TODO: Breadth First Search
+	
+}
+
+int SimpleHero::getNumEatables() {
+	// TODO: Get the number of eatables remaining to eat
+	return 0;
+}
+
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// TODO: Select the next move that the SimpleHero is going to make.
 	
@@ -25,7 +35,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		return 0;
 	}
 
-	return d-1; // TODO: Return the direction that the SimpleHero is going to go.
+	return 0; // TODO: Return the direction that the SimpleHero is going to go.
 }
 
 Actor* SimpleHero::duplicate() {

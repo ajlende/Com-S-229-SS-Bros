@@ -15,7 +15,12 @@
 class SimpleHero : public Actor
 {
 	protected:
-		void BFS(int s);
+		/**
+		 * Does a Breadth First Search starting at index s
+		 */
+		int* BFS(GraphMap* map, int x, int y, int a, int b, int& first_neighbor);
+		int getNumEatables();
+		
 		
 	public:
 		SimpleHero(int type);
