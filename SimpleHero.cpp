@@ -15,7 +15,7 @@ SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
 }
 
-void int* BFS(GraphMap* map, int x, int y, int a, int b, int& first_neighbor) {
+int* BFS(GraphMap* map, int x, int y, int a, int b, int& first_neighbor) {
 	// TODO: Breadth First Search
 	
 }
