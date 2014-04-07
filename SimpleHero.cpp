@@ -81,7 +81,7 @@ std::vector<int>* SimpleHero::findPath(GraphMap* map, int start, int end) {
 std::vector<int>* SimpleHero::getEatables(GraphMap* map) {
 	// TODO: Get an array of all of the eatables remaining to eat
 	std::vector<int>* allEatables;
-	numActors = map->getNumActors();
+	int numActors = map->getNumActors();
 	for (int i = 0; i < numActors; i++) {
 		int actor = map->getActorType(i);
 		if ((actor & ACTOR_EATABLE) && !(actor & ACTOR_DEAD)) {
@@ -96,7 +96,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	std::vector<int>* eatables = this->getEatables(map);
 	int start = map->getVertex(x, y);
 	int closest = 0;
-	int distance = INT_MAX;
+	unsigned int distance = UINT_MAX;
 	
 	// Look through all the eatables for the closest one
 	for (int e : *eatables) {
