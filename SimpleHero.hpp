@@ -8,6 +8,7 @@
 
 #include "Actor.hpp"
 #include "GraphMap.hpp"
+#include <vector>
 
 /**
  * The SimpleHero follows a simple greedy type strategy to collect all of the eatables.
@@ -16,11 +17,14 @@ class SimpleHero : public Actor
 {
 	protected:
 		/**
-		 * Does a Breadth First Search starting at index s
+		 * Finds the shortest path from vertex start to vertex end in the map.
 		 */
-		int* BFS(GraphMap* map, int x, int y, int a, int b, int& first_neighbor);
-		int getNumEatables();
-		
+		std::vector<int>* SimpleHero::findPath(GraphMap* map, int start, int end);
+
+		/**
+		 * Gets all of the eatables reamining on the map.
+		 */
+		std::vector<int>* SimpleHero::getEatables(GraphMap* map);
 		
 	public:
 		SimpleHero(int type);
