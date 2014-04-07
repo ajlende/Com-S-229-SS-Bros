@@ -19,12 +19,12 @@ class SimpleHero : public Actor
 		/**
 		 * Finds the shortest path from vertex start to vertex end in the map.
 		 */
-		void findPath(GraphMap* map, int start, int end, std::vector<int>* allEatables);
+		void findPath(GraphMap* map, int start, int end, std::vector<int>* V);
 
 		/**
 		 * Gets all of the eatables reamining on the map.
 		 */
-		void getEatables(GraphMap* map, std::vector<int>* V);
+		void getEatables(GraphMap* map, std::vector<int>* allEatables);
 		
 	public:
 		SimpleHero(int type);
