@@ -100,8 +100,8 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		auto path = new std::vector<int>;
 		this->findPath(map, start, e, path);
 
-		if (path && path.size() < distance) {
-			closest = path.back();
+		if (path && path->size() < distance) {
+			closest = path->back();
 		}
 	}
 
