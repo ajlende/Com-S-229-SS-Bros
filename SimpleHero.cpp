@@ -65,8 +65,8 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		// TODO: Build the array of the path to return
 		int n = end;
 		while (n != start) {
-			V->push_back(n);
 			n = previous[n];
+			V->push_back(n);
 		}
 
 		waddstr(stdscr, "Path from %d to %d: ", start, end);
