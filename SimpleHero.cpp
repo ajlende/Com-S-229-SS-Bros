@@ -19,22 +19,20 @@ SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
 }
 
-std::vector<int>* SimpleHero::findPath(GraphMap* map, int start, int end) {
+std::vector<int>* SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
 	int numVerts = map->getNumVertices();
 	bool* visited = new bool[numVerts];
 	int* previous = new int[numVerts];
 
-	std::queue<int>* Q;
-
-	std::vector<int>* V;
+	auto Q = new std::queue<int>;
 
 	previous[start] = start;
 	visited[start] = true;
-	Q->push(start);
+	Q.push(start);
 
-	while (!Q->empty()) {
-		int vertex = Q->front();
-		Q->pop();
+	while (!Q.empty()) {
+		int vertex = Q.front();
+		Q.pop();
 
 		// Get an array of the vertex's neighbors
 		int x, y;
@@ -53,7 +51,7 @@ std::vector<int>* SimpleHero::findPath(GraphMap* map, int start, int end) {
 			if (!visited[n]) {
 				visited[n] = true;
 				previous[n] = vertex;
-				Q->push(neighbors[n]);
+				Q.push(neighbors[n]);
 			}
 		}
 
@@ -74,13 +72,11 @@ std::vector<int>* SimpleHero::findPath(GraphMap* map, int start, int end) {
 
 	delete[] visited;
 	delete[] previous;
-
-	return V;
+	delete Q;
 }
 
-std::vector<int>* SimpleHero::getEatables(GraphMap* map) {
+void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 	// TODO: Get an array of all of the eatables remaining to eat
-	std::vector<int>* allEatables;
 	int numActors = map->getNumActors();
 	for (int i = 0; i < numActors; i++) {
 		int actor = map->getActorType(i);
@@ -88,23 +84,28 @@ std::vector<int>* SimpleHero::getEatables(GraphMap* map) {
 			allEatables->push_back(i);
 		}
 	}
-	return allEatables;
 }
 
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// TODO: Select the next move that the SimpleHero is going to make.
-	std::vector<int>* eatables = this->getEatables(map);
+	auto eatables = new std::vector<int>;
+	this->getEatables(map, &eatables);
+
 	int start = map->getVertex(x, y);
 	int closest = 0;
 	unsigned int distance = UINT_MAX;
 	
 	// Look through all the eatables for the closest one
-	for (int e : *eatables) {
-		std::vector<int>* path = this->findPath(map, start, e);
-		if (path && path->size() < distance) {
-			closest = path->back();
+	for (int e : eatables) {
+		auto path = new std::vector<int>;
+		this->findPath(map, start, e, &path);
+
+		if (path && path.size() < distance) {
+			closest = path.back();
 		}
 	}
+
+	delete eatables;
 	
 	return closest; // TODO: Return the direction that the SimpleHero is going to go.
 }
