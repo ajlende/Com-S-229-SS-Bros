@@ -24,7 +24,7 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 	bool* visited = new bool[numVerts];
 	int* previous = new int[numVerts];
 
-	auto Q = new std::queue<int>;
+	auto Q = new std::queue<int>();
 
 	previous[start] = start;
 	visited[start] = true;
@@ -60,7 +60,7 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 	
 	// If the end vertex hasn't been visited, then there is no path
 	if (!visited[end]) {
-		return NULL;
+		V = NULL;
 	} else {
 		// TODO: Build the array of the path to return
 		int n = end;
