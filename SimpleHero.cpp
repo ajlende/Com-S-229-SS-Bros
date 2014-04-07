@@ -73,7 +73,7 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		for (auto& c : *V) {
     		waddstr(stdscr, "%d ", c);
 		}
-		waddstr(stdscr, "\n");
+		waddstr(stdscr, "\n\r");
 	}
 
 	delete[] visited;
