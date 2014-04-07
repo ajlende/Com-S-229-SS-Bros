@@ -103,6 +103,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		if (path && path->size() < distance) {
 			closest = path->back();
 		}
+		delete path;
 	}
 
 	delete eatables;
