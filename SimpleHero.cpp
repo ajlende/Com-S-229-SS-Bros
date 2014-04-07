@@ -102,7 +102,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	for (int e : eatables) {
 		std::vector<int>* path = this->findPath(map, start, e);
 		if (path && path->size() < distance) {
-			closest = path[0];
+			closest = path->back();
 		}
 	}
 	
