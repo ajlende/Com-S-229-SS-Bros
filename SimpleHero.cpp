@@ -93,20 +93,20 @@ std::vector<int>* SimpleHero::getEatables(GraphMap* map) {
 
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// TODO: Select the next move that the SimpleHero is going to make.
-	std::vector<int> eatables = this->getEatables(map);
+	std::vector<int>* eatables = this->getEatables(map);
 	int start = map->getVertex(x, y);
 	int closest = 0;
 	int distance = INT_MAX;
 	
 	// Look through all the eatables for the closest one
 	for (int e : eatables) {
-		std::vector<int> path = this->findPath(map, start, e);
-		if (path && path.size() < distance) {
+		std::vector<int>* path = this->findPath(map, start, e);
+		if (path && path->size() < distance) {
 			closest = path[0];
 		}
 	}
 	
-	return closest // TODO: Return the direction that the SimpleHero is going to go.
+	return closest; // TODO: Return the direction that the SimpleHero is going to go.
 }
 
 Actor* SimpleHero::duplicate() {
