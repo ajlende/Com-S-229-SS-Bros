@@ -28,11 +28,11 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 
 	previous[start] = start;
 	visited[start] = true;
-	Q.push(start);
+	Q->push(start);
 
-	while (!Q.empty()) {
-		int vertex = Q.front();
-		Q.pop();
+	while (!Q->empty()) {
+		int vertex = Q->front();
+		Q->pop();
 
 		// Get an array of the vertex's neighbors
 		int x, y;
@@ -51,7 +51,7 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 			if (!visited[n]) {
 				visited[n] = true;
 				previous[n] = vertex;
-				Q.push(neighbors[n]);
+				Q->push(neighbors[n]);
 			}
 		}
 
