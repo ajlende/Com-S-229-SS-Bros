@@ -49,11 +49,11 @@ std::vector<int>* SimpleHero::findPath(GraphMap* map, int start, int end) {
 		}
 		
 		// For each of the neighbors, if it isn't visited, then put it on the queue and mark the vertex that we came from to reach it
-		for (int n : neighbors) {
+		for (int n = 0; n < numNeighbors; n++) {
 			if (!visited[n]) {
 				visited[n] = true;
 				previous[n] = vertex;
-				Q->push(n);
+				Q->push(neighbors[n]);
 			}
 		}
 
@@ -99,7 +99,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	int distance = INT_MAX;
 	
 	// Look through all the eatables for the closest one
-	for (int e : eatables) {
+	for (int e : *eatables) {
 		std::vector<int>* path = this->findPath(map, start, e);
 		if (path && path->size() < distance) {
 			closest = path->back();
