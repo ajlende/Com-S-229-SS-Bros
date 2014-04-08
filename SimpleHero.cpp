@@ -19,7 +19,7 @@ SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
 }
 
-void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int> V) {
+void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
 	int numVerts = map->getNumVertices();
 	bool* visited = new bool[numVerts];
 	int* previous = new int[numVerts];
