@@ -94,6 +94,13 @@ void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// TODO: Select the next move that the SimpleHero is going to make.
+	int d = map->getNumNeighbors(x, y);
+
+	if ( d <= 1 )
+	{
+		return 0;
+	}
+
 	auto eatables = new std::vector<int>();
 	this->getEatables(map, eatables);
 
@@ -113,6 +120,18 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	}
 
 	delete eatables;
+
+	for ( int i = 0; i < d; i++ )
+	{
+		int p, q;
+		map->getNeighbor(x, y, i, p, q);
+
+		if ( p == a && q == b )
+		{
+			return i;
+		}
+	}
+
 	
 	return closest; // TODO: Return the direction that the SimpleHero is going to go.
 }
