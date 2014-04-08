@@ -19,7 +19,7 @@ SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
 }
 
-void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
+void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>& V) {
 	int numVerts = map->getNumVertices();
 	bool* visited = new bool[numVerts];
 	int* previous = new int[numVerts];
@@ -60,20 +60,20 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 	
 	// If the end vertex hasn't been visited, then there is no path
 	if (!visited[end]) {
-		V = NULL;
+		printf("findPath() could not find a path to %d!\n", end);
 	} else {
 		// TODO: Build the array of the path to return
 		int n = end;
 		while (n != start) {
 			n = previous[n];
-			V->push_back(n);
+			V.push_back(n);
 		}
 
 		printf("Path from %d to %d: ", start, end);
-		for (auto& c : *V) {
+		for (auto& c : V) {
     		printf("%d ", c);
 		}
-		printf("\n\r");
+		printf("\n");
 	}
 
 	delete[] visited;
@@ -120,15 +120,16 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		auto path = new std::vector<int>;
 		this->findPath(map, start, e, path);
 		
-		if (path) {
+		if (!path->empty()) {
 			printf("Path found to %d! Distance is %d\n", e, path->size());
 		} else {
 			printf("No path to eatable at vertex %d\n", e);
 		}
 
-		if (path && path->size() < min_distance) {
+		if (!path->empty() && path->size() < min_distance) {
 			closest = path->back();
 		}
+
 		delete path;
 	}
 
