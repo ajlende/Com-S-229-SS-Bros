@@ -40,7 +40,7 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		int numNeighbors = map->getNumNeighbors(x, y);
 		int* neighbors = new int[numNeighbors];
 		
-		printf("Neighbors to vertex [%d, (%d, %d)]: ");
+		printf("Neighbors to vertex [%d, (%d, %d)]: ", vertex, x, y);
 		for (int i = 0; i < numNeighbors; i++) {
 			int a, b;
 			map->getNeighbor(x, y, i, a, b);
@@ -70,8 +70,8 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		// TODO: Build the array of the path to return
 		int n = end;
 		while (n != start) {
-			n = previous[n];
 			V->push_back(n);
+			n = previous[n];
 		}
 
 		printf("Path from %d to %d: ", start, end);
