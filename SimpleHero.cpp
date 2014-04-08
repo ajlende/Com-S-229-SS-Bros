@@ -121,6 +121,9 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 	delete eatables;
 
+	int a, b;
+	map->getPosition(closest, a, b);
+
 	for ( int i = 0; i < d; i++ )
 	{
 		int p, q;
@@ -133,7 +136,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	}
 
 	
-	return closest; // TODO: Return the direction that the SimpleHero is going to go.
+	return ; // TODO: Return the direction that the SimpleHero is going to go.
 }
 
 Actor* SimpleHero::duplicate() {
