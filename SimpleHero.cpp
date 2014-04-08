@@ -124,17 +124,14 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	int a, b;
 	map->getPosition(closest, a, b);
 
-	for ( int i = 0; i < d; i++ )
-	{
+	for (int i = 0; i < d; i++) {
 		int p, q;
 		map->getNeighbor(x, y, i, p, q);
 
-		if ( p == a && q == b )
-		{
+		if ( p == a && q == b ) {
 			return i;
 		}
 	}
-
 	
 	return 0; // TODO: Return the direction that the SimpleHero is going to go.
 }

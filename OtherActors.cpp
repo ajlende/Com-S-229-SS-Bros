@@ -124,8 +124,8 @@ int KeyboardActor::selectNeighbor( GraphMap* map, int x, int y )
 		case 'j':
 		case 'J':
 		case '2':
-		case 's';
-		case 'S';
+		case 's':
+		case 'S':
 		case KEY_DOWN:
 			b = (y + 1) % map->getHeight();
 			break;
