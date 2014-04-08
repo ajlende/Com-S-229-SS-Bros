@@ -19,7 +19,7 @@ SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
 }
 
-void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>& V) {
+void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int> V) {
 	int numVerts = map->getNumVertices();
 	bool* visited = new bool[numVerts];
 	int* previous = new int[numVerts];
@@ -40,17 +40,22 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>& V
 		int numNeighbors = map->getNumNeighbors(x, y);
 		int* neighbors = new int[numNeighbors];
 		
+		printf("Neighbors to vertex [%d, (%d, %d)]: ")
 		for (int i = 0; i < numNeighbors; i++) {
 			int a, b;
 			map->getNeighbor(x, y, i, a, b);
 			neighbors[i] = map->getVertex(a, b);
+			printf("[%d, (%d, %d)] ", neighbors[i], a, b);
 		}
+		printf("\n");
 		
+
 		// For each of the neighbors, if it isn't visited, then put it on the queue and mark the vertex that we came from to reach it
 		for (int n = 0; n < numNeighbors; n++) {
-			if (!visited[n]) {
-				visited[n] = true;
-				previous[n] = vertex;
+			if (!visited[neighbors[n]]) {
+				visited[neighbors[n]] = true;
+				printf("visited %d", neighbors[n]);
+				previous[neighbors[n]] = vertex;
 				Q->push(neighbors[n]);
 			}
 		}
@@ -66,11 +71,11 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>& V
 		int n = end;
 		while (n != start) {
 			n = previous[n];
-			V.push_back(n);
+			V->push_back(n);
 		}
 
 		printf("Path from %d to %d: ", start, end);
-		for (auto& c : V) {
+		for (auto& c : *V) {
     		printf("%d ", c);
 		}
 		printf("\n");
