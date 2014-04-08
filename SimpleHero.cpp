@@ -51,14 +51,16 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		
 
 		// For each of the neighbors, if it isn't visited, then put it on the queue and mark the vertex that we came from to reach it
+		printf("Visited: ");
 		for (int n = 0; n < numNeighbors; n++) {
 			if (!visited[neighbors[n]]) {
 				visited[neighbors[n]] = true;
-				printf("visited %d", neighbors[n]);
+				printf("%d ", neighbors[n]);
 				previous[neighbors[n]] = vertex;
 				Q->push(neighbors[n]);
 			}
 		}
+		printf("\n");
 
 		delete[] neighbors;
 	}
