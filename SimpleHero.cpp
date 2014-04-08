@@ -98,6 +98,9 @@ void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// TODO: Select the next move that the SimpleHero is going to make.
+
+	printf("Hero is at vertex %d: (%d, %d)\n", map->getVertex(x, y), x, y);
+
 	int d = map->getNumNeighbors(x, y);
 
 	if ( d <= 1 )
