@@ -89,7 +89,9 @@ void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 		if ((actor & ACTOR_EATABLE) && !(actor & ACTOR_DEAD)) {
 			int x, y;
 			map->getActorPosition(i, x, y);
-			allEatables->push_back(map->getVertex(x, y));
+			int vertex = map->getVertex(x, y);
+			allEatables->push_back(vertex);
+			printf("Found Eatable %d at vertex %d: (%d, %d)\n", i, vertex, x, y);
 		}
 	}
 }
@@ -108,14 +110,20 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 	int start = map->getVertex(x, y);
 	int closest = 0;
-	unsigned int distance = UINT_MAX;
+	unsigned int min_distance = UINT_MAX;
 	
 	// Look through all the eatables for the closest one
 	for (int& e : *eatables) {
 		auto path = new std::vector<int>;
 		this->findPath(map, start, e, path);
+		
+		if (path) {
+			printf("Path found to %d! Distance is %d\n", e, path->size());
+		} else {
+			printf("No path to eatable at vertex %d\n", e);
+		}
 
-		if (path && path->size() < distance) {
+		if (path && path->size() < min_distance) {
 			closest = path->back();
 		}
 		delete path;
