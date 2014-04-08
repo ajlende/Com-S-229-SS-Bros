@@ -82,12 +82,14 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 }
 
 void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
-	// TODO: Get an array of all of the eatables remaining to eat
+	// TODO: Get an array of the index of all of the eatables remaining to eat
 	int numActors = map->getNumActors();
 	for (int i = 0; i < numActors; i++) {
 		int actor = map->getActorType(i);
 		if ((actor & ACTOR_EATABLE) && !(actor & ACTOR_DEAD)) {
-			allEatables->push_back(i);
+			int x, y;
+			map->getActorPosition(i, x, y);
+			allEatables->push_back(map->getVertex(x, y));
 		}
 	}
 }
@@ -123,7 +125,8 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 	int a, b;
 	map->getPosition(closest, a, b);
-
+	
+	// Figure out which neighbor coresponds to the index that we want to go to.
 	for (int i = 0; i < d; i++) {
 		int p, q;
 		map->getNeighbor(x, y, i, p, q);
