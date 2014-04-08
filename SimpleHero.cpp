@@ -40,7 +40,7 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		int numNeighbors = map->getNumNeighbors(x, y);
 		int* neighbors = new int[numNeighbors];
 		
-		printf("Neighbors to vertex [%d, (%d, %d)]: ")
+		printf("Neighbors to vertex [%d, (%d, %d)]: ");
 		for (int i = 0; i < numNeighbors; i++) {
 			int a, b;
 			map->getNeighbor(x, y, i, a, b);
@@ -123,7 +123,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// Look through all the eatables for the closest one
 	for (int& e : *eatables) {
 		auto path = new std::vector<int>;
-		this->findPath(map, start, e, *path);
+		this->findPath(map, start, e, path);
 		
 		if (!path->empty()) {
 			printf("Path found to %d! Distance is %d\n", e, path->size());
