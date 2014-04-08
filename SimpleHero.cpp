@@ -40,34 +40,34 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		int numNeighbors = map->getNumNeighbors(x, y);
 		int* neighbors = new int[numNeighbors]();
 		
-		printf("Neighbors to vertex [%d, (%d, %d)]: ", vertex, x, y);
+		// TODO: Remove printf("Neighbors to vertex [%d, (%d, %d)]: ", vertex, x, y);
 		for (int i = 0; i < numNeighbors; i++) {
 			int a, b;
 			map->getNeighbor(x, y, i, a, b);
 			neighbors[i] = map->getVertex(a, b);
-			printf("[%d, (%d, %d)] ", neighbors[i], a, b);
+			// TODO: Remove printf("[%d, (%d, %d)] ", neighbors[i], a, b);
 		}
-		printf("\n");
+		// TODO: Remove printf("\n");
 		
 
 		// For each of the neighbors, if it isn't visited, then put it on the queue and mark the vertex that we came from to reach it
-		printf("Visited: ");
+		// TODO: Remove printf("Visited: ");
 		for (int n = 0; n < numNeighbors; n++) {
 			if (!visited[neighbors[n]]) {
 				visited[neighbors[n]] = true;
-				printf("%d ", neighbors[n]);
+				// TODO: Remove printf("%d ", neighbors[n]);
 				previous[neighbors[n]] = vertex;
 				Q->push(neighbors[n]);
 			}
 		}
-		printf("\n");
+		// TODO: Remove printf("\n");
 
 		delete[] neighbors;
 	}
 	
 	// If the end vertex hasn't been visited, then there is no path
 	if (!visited[end]) {
-		printf("findPath() could not find a path to %d!\n", end);
+		// TODO: Remove printf("findPath() could not find a path to %d!\n", end);
 	} else {
 		// TODO: Build the array of the path to return
 		int n = end;
@@ -76,11 +76,11 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 			n = previous[n];
 		}
 
-		printf("Path from %d to %d: ", start, end);
+		// TODO: Remove printf("Path from %d to %d: ", start, end);
 		for (auto& c : *V) {
-    		printf("%d ", c);
+    		// TODO: Remove printf("%d ", c);
 		}
-		printf("\n");
+		// TODO: Remove printf("\n");
 	}
 
 	delete[] visited;
@@ -98,7 +98,7 @@ void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 			map->getActorPosition(i, x, y);
 			int vertex = map->getVertex(x, y);
 			allEatables->push_back(vertex);
-			printf("Found Eatable %d at vertex %d: (%d, %d)\n", i, vertex, x, y);
+			// TODO: Remove printf("Found Eatable %d at vertex %d: (%d, %d)\n", i, vertex, x, y);
 		}
 	}
 }
@@ -106,7 +106,7 @@ void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	// TODO: Select the next move that the SimpleHero is going to make.
 
-	printf("Hero is at vertex %d: (%d, %d)\n", map->getVertex(x, y), x, y);
+	// TODO: Remove printf("Hero is at vertex %d: (%d, %d)\n", map->getVertex(x, y), x, y);
 
 	int d = map->getNumNeighbors(x, y);
 
@@ -128,9 +128,9 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		this->findPath(map, start, e, path);
 		
 		if (!path->empty()) {
-			printf("Path found to %d! Distance is %d\n", e, path->size());
+			// TODO: Remove printf("Path found to %d! Distance is %d\n", e, path->size());
 		} else {
-			printf("No path to eatable at vertex %d\n", e);
+			// TODO: Remove printf("No path to eatable at vertex %d\n", e);
 		}
 
 		if (!path->empty() && path->size() < min_distance) {
