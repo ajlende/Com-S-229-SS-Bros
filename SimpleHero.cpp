@@ -21,8 +21,8 @@ SimpleHero::~SimpleHero() {
 
 void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
 	int numVerts = map->getNumVertices();
-	bool* visited = new bool[numVerts];
-	int* previous = new int[numVerts];
+	bool* visited = new bool[numVerts]();
+	int* previous = new int[numVerts]();
 
 	auto Q = new std::queue<int>();
 
@@ -38,7 +38,7 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		int x, y;
 		map->getPosition(vertex, x, y);
 		int numNeighbors = map->getNumNeighbors(x, y);
-		int* neighbors = new int[numNeighbors];
+		int* neighbors = new int[numNeighbors]();
 		
 		printf("Neighbors to vertex [%d, (%d, %d)]: ", vertex, x, y);
 		for (int i = 0; i < numNeighbors; i++) {
