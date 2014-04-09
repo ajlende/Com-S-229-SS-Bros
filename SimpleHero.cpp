@@ -125,6 +125,8 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 			closest = path->back();
 		}
 
+		a_trap = false;
+
 		path->clear();
 	}
 
