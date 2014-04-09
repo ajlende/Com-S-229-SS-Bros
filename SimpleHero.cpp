@@ -113,16 +113,19 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	for (int& e : *eatables) {
 		this->findPath(map, start, e, path);
 
-		// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
-		for (int& second : *eatables) {
-			if (e == second) continue;
-			if (!this->findPath(map, e, second, second_path)) a_trap = true;
-			second_path->clear();
-		}
+		if (!path->empty() && path->size() < min_distance) {
+			
+			// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
+			for (int& second : *eatables) {
+				if (e == second) continue;
+				if (!this->findPath(map, e, second, second_path)) a_trap = true;
+				second_path->clear();
+			}
 
-		if (!path->empty() && path->size() < min_distance && !a_trap) {
-			min_distance = path->size();
-			closest = path->back();
+			if (!a_trap) {
+				min_distance = path->size();
+				closest = path->back();
+			}
 		}
 
 		a_trap = false;
