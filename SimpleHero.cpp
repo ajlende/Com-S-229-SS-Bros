@@ -56,6 +56,8 @@ bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 			}
 		}
 
+		if (visited[end]) break;
+
 		delete[] neighbors;
 	}
 	
@@ -73,6 +75,7 @@ bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 	delete[] visited;
 	delete[] previous;
 	delete Q;
+
 	return true;
 }
 
@@ -93,10 +96,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 	int d = map->getNumNeighbors(x, y);
 
-	if ( d <= 1 )
-	{
-		return 0;
-	}
+	if ( d <= 1 ) return 0;
 
 	auto eatables = new std::vector<int>();
 	this->getEatables(map, eatables);
