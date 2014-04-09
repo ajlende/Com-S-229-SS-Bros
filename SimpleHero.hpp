@@ -17,9 +17,9 @@ class SimpleHero : public Actor
 {
 	protected:
 		/**
-		 * Finds the shortest path from vertex start to vertex end in the map.
+		 * Finds the shortest path from vertex start to vertex end in the map. Returns false if no path was found.
 		 */
-		void findPath(GraphMap* map, int start, int end, std::vector<int>* V);
+		bool findPath(GraphMap* map, int start, int end, std::vector<int>* V);
 
 		/**
 		 * Gets all of the eatables reamining on the map.

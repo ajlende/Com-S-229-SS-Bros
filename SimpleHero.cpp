@@ -19,7 +19,7 @@ SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
 }
 
-void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
+bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
 	int numVerts = map->getNumVertices();
 	bool* visited = new bool[numVerts]();
 	int* previous = new int[numVerts]();
@@ -40,56 +40,43 @@ void SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 		int numNeighbors = map->getNumNeighbors(x, y);
 		int* neighbors = new int[numNeighbors]();
 		
-		// TODO: Remove printf("Neighbors to vertex [%d, (%d, %d)]: ", vertex, x, y);
 		for (int i = 0; i < numNeighbors; i++) {
 			int a, b;
 			map->getNeighbor(x, y, i, a, b);
 			neighbors[i] = map->getVertex(a, b);
-			// TODO: Remove printf("[%d, (%d, %d)] ", neighbors[i], a, b);
 		}
-		// TODO: Remove printf("\n");
 		
 
 		// For each of the neighbors, if it isn't visited, then put it on the queue and mark the vertex that we came from to reach it
-		// TODO: Remove printf("Visited: ");
 		for (int n = 0; n < numNeighbors; n++) {
 			if (!visited[neighbors[n]]) {
 				visited[neighbors[n]] = true;
-				// TODO: Remove printf("%d ", neighbors[n]);
 				previous[neighbors[n]] = vertex;
 				Q->push(neighbors[n]);
 			}
 		}
-		// TODO: Remove printf("\n");
 
 		delete[] neighbors;
 	}
 	
 	// If the end vertex hasn't been visited, then there is no path
 	if (!visited[end]) {
-		// TODO: Remove printf("findPath() could not find a path to %d!\n", end);
+		return false;
 	} else {
-		// TODO: Build the array of the path to return
 		int n = end;
 		while (n != start) {
 			V->push_back(n);
 			n = previous[n];
 		}
-
-		// TODO: Remove printf("Path from %d to %d: ", start, end);
-		for (auto& c : *V) {
-    		// TODO: Remove printf("%d ", c);
-		}
-		// TODO: Remove printf("\n");
 	}
 
 	delete[] visited;
 	delete[] previous;
 	delete Q;
+	return true;
 }
 
 void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
-	// TODO: Get an array of the index of all of the eatables remaining to eat
 	int numActors = map->getNumActors();
 	for (int i = 0; i < numActors; i++) {
 		int actor = map->getActorType(i);
@@ -98,15 +85,11 @@ void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 			map->getActorPosition(i, x, y);
 			int vertex = map->getVertex(x, y);
 			allEatables->push_back(vertex);
-			// TODO: Remove printf("Found Eatable %d at vertex %d: (%d, %d)\n", i, vertex, x, y);
 		}
 	}
 }
 
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
-	// TODO: Select the next move that the SimpleHero is going to make.
-
-	// TODO: Remove printf("Hero is at vertex %d: (%d, %d)\n", map->getVertex(x, y), x, y);
 
 	int d = map->getNumNeighbors(x, y);
 
@@ -122,19 +105,22 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	int closest = 0;
 	unsigned int min_distance = UINT_MAX;
 	
-	auto path = new std::vector<int>;
+	auto path = new std::vector<int>();
+	auto second_path = new std::vector<int>();
+	bool a_trap = false;
 
 	// Look through all the eatables for the closest one
 	for (int& e : *eatables) {
 		this->findPath(map, start, e, path);
-		
-		if (!path->empty()) {
-			// TODO: Remove printf("Path found to %d! Distance is %d\n", e, path->size());
-		} else {
-			// TODO: Remove printf("No path to eatable at vertex %d\n", e);
+
+		// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
+		for (int& second : eatables) {
+			if (e == second) continue;
+			if (this->findPath(map, e, second, second_path)) a_trap = true;
+			second_path->clear();
 		}
 
-		if (!path->empty() && path->size() < min_distance) {
+		if (!path->empty() && path->size() < min_distance && !a_trap) {
 			min_distance = path->size();
 			closest = path->back();
 		}
@@ -143,6 +129,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	}
 
 	delete path;
+	delete second_path;
 
 	delete eatables;
 
@@ -159,7 +146,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		}
 	}
 	
-	return 0; // TODO: Return the direction that the SimpleHero is going to go.
+	return 0;
 }
 
 Actor* SimpleHero::duplicate() {
