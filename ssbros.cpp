@@ -11,6 +11,8 @@
 #include "OtherActors.hpp"
 #include "SimpleHero.hpp"
 #include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 int main( int argc, char** argv )
 {
@@ -21,7 +23,15 @@ int main( int argc, char** argv )
 
 	GameManager* manager = new GameManager(argc, argv, actors, num_actors);
 	manager->addActor(new Actor(ACTOR_HERO));
+
+
+	// TODO: Remove clock
+	clock_t t;
+	t = clock();
 	manager->play();
+	t = clock() - t;
+	printf ("It took %d cycles (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
+
 
 	delete manager;
 	manager = 0;
