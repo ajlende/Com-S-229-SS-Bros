@@ -59,7 +59,7 @@ int main( int argc, char** argv ) {
 	}
 
 	if (s) {
-		if (seed) srand(stoi(seed,nullptr, 0));
+		if (seed) srand(std::stoi(seed,nullptr,0));
 		else printf("seed: %ld\n", time(NULL));
 	}
 
@@ -80,7 +80,7 @@ int main( int argc, char** argv ) {
 
 	if (t) {
 		clk = clock() - clk;
-		printf ("It took %d cycles (%f seconds)\n",clk,((float)clk)/CLOCKS_PER_SEC);
+		printf ("It took %ld cycles (%f seconds)\n",clk,((float)clk)/CLOCKS_PER_SEC);
 	}
 
 	delete manager;
