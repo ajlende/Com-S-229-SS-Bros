@@ -17,7 +17,8 @@
 
 int main( int argc, char** argv ) {
 
-	bool t = s = false;
+	bool t = false;
+	bool s = false;
 	char* seed = 0;
 
 	while(true) {
@@ -38,7 +39,7 @@ int main( int argc, char** argv ) {
 		};
 
 		int option_index = 0;
-		c = getopt_long (argc, argv, "ts:", long_options, &option_index);
+		int c = getopt_long (argc, argv, "ts:", long_options, &option_index);
 
 		if (c == -1)
 			break;
@@ -48,11 +49,9 @@ int main( int argc, char** argv ) {
 				
 				break;
 			case 't':
-				printf("t: %s\n", argv[option_index]);
 				t = true;
 				break;
 			case 's':
-				printf("s: %s\n", argv[option_index]);
 				s = true;
 				seed = optarg;
 				break;
@@ -61,7 +60,7 @@ int main( int argc, char** argv ) {
 
 	if (s) {
 		if (seed) srand(stoi(seed,nullptr, 0));
-		else printf("seed: %u\n", time(NULL));
+		else printf("seed: %ld\n", time(NULL));
 	}
 
 	Actor** actors = (Actor**) malloc(10 * sizeof(Actor*));
@@ -72,16 +71,16 @@ int main( int argc, char** argv ) {
 	GameManager* manager = new GameManager(argc, argv, actors, num_actors);
 	manager->addActor(new Actor(ACTOR_HERO));
 
-	clock_t t;
+	clock_t clk;
 	if (t) {
-		t = clock();
+		clk = clock();
 	}
 
 	manager->play();
 
 	if (t) {
-		t = clock() - t;
-		printf ("It took %d cycles (%f seconds)\n",t,((float)t)/CLOCKS_PER_SEC);
+		clk = clock() - clk;
+		printf ("It took %d cycles (%f seconds)\n",clk,((float)clk)/CLOCKS_PER_SEC);
 	}
 
 	delete manager;
