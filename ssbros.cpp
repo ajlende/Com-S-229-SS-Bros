@@ -2,7 +2,7 @@
  * ssbros.cpp
  *
  *  Created on: Mar 7, 2014
- *      Author: stolee
+ *	  Author: stolee
  */
 
 #include "GraphMap.hpp"
@@ -13,9 +13,57 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <getopt.h>
 
-int main( int argc, char** argv )
-{
+int main( int argc, char** argv ) {
+
+	bool t = s = false;
+	char* seed = 0;
+
+	while(true) {
+		static struct option long_options[] = {
+			{"timer",         no_argument,       0, 't'},
+			{"seed",          optional_argument, 0, 's'},
+			{"moves",         required_argument, 0, 0},
+			{"hero",          required_argument, 0, 0},
+			{"enemy",         required_argument, 0, 0},
+			{"eatable",       required_argument, 0, 0},
+			{"powerup",       required_argument, 0, 0},
+			{"delay-hero",    required_argument, 0, 0},
+			{"delay-enemy",   required_argument, 0, 0},
+			{"delay-eatable", required_argument, 0, 0},
+			{"delay-powerup", required_argument, 0, 0},
+			{"delay",         required_argument, 0, 0},
+			{"render-off",    no_argument,       0, 0}
+		};
+
+		int option_index = 0;
+		c = getopt_long (argc, argv, "ts:", long_options, &option_index);
+
+		if (c == -1)
+			break;
+
+		switch (c) {
+			case 0:
+				
+				break;
+			case 't':
+				printf("t: %s\n", argv[option_index]);
+				t = true;
+				break;
+			case 's':
+				printf("s: %s\n", argv[option_index]);
+				s = true;
+				seed = optarg;
+				break;
+		}
+	}
+
+	if (s) {
+		if (seed) srand(stoi(seed,nullptr, 0));
+		else printf("seed: %u\n", time(NULL));
+	}
+
 	Actor** actors = (Actor**) malloc(10 * sizeof(Actor*));
 
 	int num_actors = 1;
@@ -24,14 +72,17 @@ int main( int argc, char** argv )
 	GameManager* manager = new GameManager(argc, argv, actors, num_actors);
 	manager->addActor(new Actor(ACTOR_HERO));
 
-
-	// TODO: Remove clock
 	clock_t t;
-	t = clock();
-	manager->play();
-	t = clock() - t;
-	printf ("It took %d cycles (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
+	if (t) {
+		t = clock();
+	}
 
+	manager->play();
+
+	if (t) {
+		t = clock() - t;
+		printf ("It took %d cycles (%f seconds)\n",t,((float)t)/CLOCKS_PER_SEC);
+	}
 
 	delete manager;
 	manager = 0;

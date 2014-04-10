@@ -1,0 +1,95 @@
+===========================================
+|                                         |
+|      Project 2A                         |
+|      Super Stolee Bros (PAC++MAN)       |
+|                                         |
+|      Alex Lende                         |
+|      ajlende                            |
+|                                         |
+===========================================
+
+SimpleHero Strategy
+===========================================
+Simplehero follows a basic greedy strategy to collect eatables. It lookes for the
+next closest eatable, and if it can reach every other eatable from where it's at,
+then it goes to it, otherwise it looks for the next nearest eatable that all other
+eatables can be reached from and eats that instead.
+
+
+
+SmartEnemy Strategy
+===========================================
+Smartenemy does not yet exist...but when it does...
+
+All of the stuff about it will be here.
+
+
+
+SmartPowerup Strategy
+===========================================
+Smartpowerup does not yet exist...but when it does...
+
+All of the stuff about it will be here.
+
+
+
+SmartHero Strategy
+===========================================
+Smarthero does not yet exist...but when it does...
+
+All of the stuff about it will be here.
+
+
+
+Files
+===========================================
+README:
+-------
+This README.
+
+
+Makefile:
+---------
+The Makefile contained in the project contains three sections as described below. 
+
+1. all command     - This is the default make command to compile all of the
+                     programs normally. CXXFLAGS includes -g for debugging.
+					 This may be removed.
+2. clean command   - This will clean out all object files created by 'make all'.
+					 Object files created by Prof. Stolee will remain.
+3. tarball command - This will make a tarball from the source files for
+                     submission.
+
+
+simplehero.cpp:
+---------------
+simplehero.cpp contains the implementation of the SimpleHero class.
+
+Additional private methods created were findPath and getEatables which found a
+path to the specified vertex and created a list of all of the remaining eatables
+on the map. Additional information and descriptions can be found in simplehero.hpp.
+
+
+simplehero.hpp:
+---------------
+simplehero.hpp contains the class definition for the simplehero class.
+
+See simplehero.hpp for additional details on methods.
+
+
+ssbros.cpp:
+-----------
+ssbros.cpp contains the main method for the program. See 'Additional Features'
+for more details.
+
+
+Additional Freatures
+===========================================
+ssbros includes some additional command line arguments that are available.
+
+-t, --timer
+	Times how long it takes for the program to execute.
+
+-s seed, --seed=seed
+	Uses a specific seed for running the program. If specified without a value, it 
+	will print the current calendar time in seconds.
