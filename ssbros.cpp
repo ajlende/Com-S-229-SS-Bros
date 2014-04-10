@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <getopt.h>
+#include <string>
 
 int main( int argc, char** argv ) {
 
