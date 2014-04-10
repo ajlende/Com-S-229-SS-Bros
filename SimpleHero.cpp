@@ -1,6 +1,8 @@
 /*
  * SimpleHero.cpp
  * by Alex Lende
+ *
+ * TODO: Allocate structures on the stack because it is faster.
  */
 
 #include "SimpleHero.hpp"
@@ -79,8 +81,21 @@ bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 	return true;
 }
 
-void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
+void SimpleHero::getActors(GraphMap* map, int y_type, int n_type std::vector<int>* allActors) {
 	int numActors = map->getNumActors();
+	for (int i = 0; i < numActors; i++) {
+		int actor = map->getActorType(i);
+		if ((actor & y_type) == y_type && (actor & n_type) == 0) {
+			int x, y;
+			map->getActorPosition(i, x, y);
+			int vertex = map->getVertex(x, y);
+			allActors->push_back(vertex);
+		}
+	}
+}
+
+void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
+	/* int numActors = map->getNumActors();
 	for (int i = 0; i < numActors; i++) {
 		int actor = map->getActorType(i);
 		if ((actor & ACTOR_EATABLE) && !(actor & ACTOR_DEAD)) {
@@ -89,7 +104,8 @@ void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
 			int vertex = map->getVertex(x, y);
 			allEatables->push_back(vertex);
 		}
-	}
+	} */
+	this->getActors(map, ACTOR_EATABLE, ACTOR_DEAD, allEatables);
 }
 
 int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
@@ -103,7 +119,9 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 	int start = map->getVertex(x, y);
 	int closest = 0;
+	int t_closest = 0;
 	unsigned int min_distance = UINT_MAX;
+	unsigned int t_min_distance = UINT_MAX;
 	
 	auto path = new std::vector<int>();
 	auto second_path = new std::vector<int>();
@@ -125,6 +143,9 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 			if (!a_trap) {
 				min_distance = path->size();
 				closest = path->back();
+			} else {
+				t_min_distance = path->size();
+				t_closest = path->back();
 			}
 		}
 
@@ -139,7 +160,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	delete eatables;
 
 	int a, b;
-	map->getPosition(closest, a, b);
+	map->getPosition((closest != 0) ? closest : t_closest, a, b);
 	
 	// Figure out which neighbor coresponds to the index that we want to go to.
 	for (int i = 0; i < d; i++) {

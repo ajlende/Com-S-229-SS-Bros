@@ -89,7 +89,3 @@ ssbros includes some additional command line arguments that are available.
 
 -t, --timer
 	Times how long it takes for the program to execute.
-
--s seed, --seed=seed
-	Uses a specific seed for running the program. If specified without a value, it 
-	will print the current calendar time in seconds.
