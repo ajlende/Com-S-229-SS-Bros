@@ -24,7 +24,8 @@ int main( int argc, char** argv ) {
 	while(true) {
 		static struct option long_options[] = {
 			{"timer",         no_argument,       0, 't'},
-			{"seed",          optional_argument, 0, 's'},
+			{"seed",          optional_argument, 0, 's'}
+			/* ,
 			{"moves",         required_argument, 0, 0},
 			{"hero",          required_argument, 0, 0},
 			{"enemy",         required_argument, 0, 0},
@@ -35,7 +36,7 @@ int main( int argc, char** argv ) {
 			{"delay-eatable", required_argument, 0, 0},
 			{"delay-powerup", required_argument, 0, 0},
 			{"delay",         required_argument, 0, 0},
-			{"render-off",    no_argument,       0, 0}
+			{"render-off",    no_argument,       0, 0} */
 		};
 
 		int option_index = 0;
@@ -45,9 +46,6 @@ int main( int argc, char** argv ) {
 			break;
 
 		switch (c) {
-			case 0:
-				
-				break;
 			case 't':
 				t = true;
 				break;
