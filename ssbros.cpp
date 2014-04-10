@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <getopt.h>
-#include <string>
 
 int main( int argc, char** argv ) {
 
@@ -60,7 +59,7 @@ int main( int argc, char** argv ) {
 	}
 
 	if (s) {
-		if (seed) srand(std::stoi(seed,nullptr,0));
+		if (seed) srand(atoi(seed));
 		else printf("seed: %ld\n", time(NULL));
 	}
 
