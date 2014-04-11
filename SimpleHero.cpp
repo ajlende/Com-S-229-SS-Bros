@@ -12,11 +12,11 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include <stack>
+#include <deque>
 
 SimpleHero::SimpleHero( int type ) : Actor(type) {
 	// TODO: Initialize member variables
-	this->goal = new std::stack<int>();
+	this->goal = new std::deque<int>();
 	this->food = new std::vector<int>();
 }
 
@@ -116,8 +116,6 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	unsigned int min_distance = UINT_MAX;
 	// unsigned int t_min_distance = UINT_MAX;
 
-	std::vector<int> best_path;
-
 
 	if (this->goal->empty()) {
 
@@ -146,7 +144,8 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 				if (!a_trap) {
 					min_distance = path_size;
 					closest = path->back();
-					best_path(path);
+					this->goal->clear();
+					std::copy(path->begin(), path->end(), goal->begin());
 				}
 		}
 	
@@ -154,18 +153,15 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	
 			path->clear();
 		}
-
-		this->goal(best_path);
 	
 		delete path;
 		delete second_path;
-		delete best_path;
 	
 		delete eatables;
 
 	} else {
-		closest = this->goal->top();
-		goal->pop();
+		closest = this->goal->back();
+		goal->pop_back();
 	}
 
 	int a, b;

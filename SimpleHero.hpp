@@ -9,7 +9,7 @@
 #include "Actor.hpp"
 #include "GraphMap.hpp"
 #include <vector>
-#include <stack>
+#include <deque>
 
 /**
  * The SimpleHero follows a simple greedy type strategy to collect all of the eatables, however, it also checks to make sure that all other eatables are reachable if it goes to it.
@@ -17,7 +17,7 @@
 class SimpleHero : public Actor
 {
 	protected:
-		std::stack<int>* goal;
+		std::deque<int>* goal;
 		std::vector<int>* food;
 
 		/**
