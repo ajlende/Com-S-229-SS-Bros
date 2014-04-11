@@ -15,12 +15,12 @@
 
 SimpleHero::SimpleHero( int type ) : Actor(type) {
 	// TODO: Initialize member variables
-	auto reachable = new std::vector<int>();
+	// auto reachable = new std::vector<int>();
 }
 
 SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
-	delete this->reachable;
+	// delete this->reachable;
 }
 
 bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
