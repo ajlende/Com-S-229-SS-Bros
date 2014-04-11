@@ -70,7 +70,7 @@ int RandomActor::selectNeighbor( GraphMap* map, int x, int y )
 		}
 		count++;
 	}
-	while ( count < 10 && choice_in_avoid_list );
+	while ( count < 5 && choice_in_avoid_list );
 
 	for ( int i = this->num_to_avoid - 1; i > 0; i-- )
 	{
@@ -115,8 +115,6 @@ int KeyboardActor::selectNeighbor( GraphMap* map, int x, int y )
 		case 'h':
 		case 'H':
 		case '4':
-		case 'a':
-		case 'A':
 		case KEY_LEFT:
 			a = (x + map->getWidth() - 1) % map->getWidth();
 			break;
@@ -124,8 +122,6 @@ int KeyboardActor::selectNeighbor( GraphMap* map, int x, int y )
 		case 'j':
 		case 'J':
 		case '2':
-		case 's':
-		case 'S':
 		case KEY_DOWN:
 			b = (y + 1) % map->getHeight();
 			break;
@@ -133,8 +129,6 @@ int KeyboardActor::selectNeighbor( GraphMap* map, int x, int y )
 		case 'k':
 		case 'K':
 		case '8':
-		case 'w':
-		case 'W':
 		case KEY_UP:
 			b = (y + map->getHeight() - 1) % map->getHeight();
 			break;
@@ -142,8 +136,6 @@ int KeyboardActor::selectNeighbor( GraphMap* map, int x, int y )
 		case 'l':
 		case 'L':
 		case '6':
-		case 'd':
-		case 'D':
 		case KEY_RIGHT:
 			a = (x + 1) % map->getWidth();
 			break;

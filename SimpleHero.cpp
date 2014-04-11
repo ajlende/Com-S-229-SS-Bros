@@ -15,10 +15,12 @@
 
 SimpleHero::SimpleHero( int type ) : Actor(type) {
 	// TODO: Initialize member variables
+	auto reachable = new std::vector<int>();
 }
 
 SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
+	delete reachable;
 }
 
 bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
@@ -132,7 +134,9 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	for (int& e : *eatables) {
 		this->findPath(map, start, e, path);
 
-		if (!path->empty() && (path->size() < min_distance || path->size() < t_min_distance)) {
+		int path_size = path->size();
+
+		if (!path->empty() && (path_size < min_distance || path_size < t_min_distance)) {
 			
 			// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
 			for (int& second : *eatables) {
@@ -142,10 +146,10 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 			}
 
 			if (!a_trap) {
-				min_distance = path->size();
+				min_distance = path_size;
 				closest = path->back();
 			} else {
-				t_min_distance = path->size();
+				t_min_distance = path_size;
 				t_closest = path->back();
 			}
 		}
