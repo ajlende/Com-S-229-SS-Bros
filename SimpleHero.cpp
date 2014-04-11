@@ -127,7 +127,11 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	
 		// Look through all the eatables for the closest one
 		for (int& e : *eatables) {
-			this->findPath(map, start, e, path);
+			bool skip = this->findPath(map, start, e, path);
+			if (!skip) {
+				path->clear();
+				continue;
+			}
 	
 			int path_size = path->size();
 	
