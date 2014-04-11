@@ -13,6 +13,7 @@
 #include <queue>
 #include <vector>
 #include <deque>
+#include <algorithm>
 
 SimpleHero::SimpleHero( int type ) : Actor(type) {
 	// TODO: Initialize member variables
