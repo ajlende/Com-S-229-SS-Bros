@@ -151,7 +151,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 					for (int& p : *path)
 						goal->push_back(p);
 					for (int& d : *goal)
-						printf("%d ", g);
+						printf("%d ", d);
 					printf("\n");
 				}
 		}
