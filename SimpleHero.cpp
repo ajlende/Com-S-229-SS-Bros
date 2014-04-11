@@ -144,7 +144,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 				min_distance = path->size();
 				closest = path->back();
 			} else {
-				min_distance = path->size();
+				t_min_distance = path->size();
 				t_closest = path->back();
 			}
 		}
