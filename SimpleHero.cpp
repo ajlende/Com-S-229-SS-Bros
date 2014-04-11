@@ -116,6 +116,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	unsigned int min_distance = UINT_MAX;
 	// unsigned int t_min_distance = UINT_MAX;
 
+	printf("goal_size: %d\n", goal->size());
 
 	if (this->goal->empty()) {
 
