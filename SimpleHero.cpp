@@ -58,9 +58,10 @@ bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V
 			}
 		}
 
+		delete[] neighbors;
+
 		if (visited[end]) break;
 
-		delete[] neighbors;
 	}
 	
 	// If the end vertex hasn't been visited, then there is no path
