@@ -147,7 +147,6 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 					min_distance = path_size;
 					closest = path->back();
 					this->goal->clear();
-					std::copy(path->begin(), path->end(), goal->begin());
 					for (int& p : *path)
 						goal->push_back(p);
 					for (int& d : *goal)
