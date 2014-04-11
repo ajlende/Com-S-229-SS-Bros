@@ -158,7 +158,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		delete eatables;
 
 	} else {
-		closest = this->goal.top();
+		closest = this->goal->top();
 		goal->pop();
 	}
 
