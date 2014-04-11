@@ -20,7 +20,7 @@ SimpleHero::SimpleHero( int type ) : Actor(type) {
 
 SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
-	delete reachable;
+	delete this->reachable;
 }
 
 bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
