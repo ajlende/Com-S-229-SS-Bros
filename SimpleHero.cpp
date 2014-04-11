@@ -114,7 +114,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	int closest = 0;
 	int t_closest = 0;
 	unsigned int min_distance = UINT_MAX;
-	unsigned int t_min_distance = UINT_MAX;
+	// unsigned int t_min_distance = UINT_MAX;
 
 
 	if (this->goal->empty()) {
@@ -157,7 +157,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	
 		delete eatables;
 
-	} else (!this->goal->empty()) {
+	} else {
 		closest = this->goal.top();
 		goal->pop();
 	}
