@@ -98,16 +98,6 @@ void SimpleHero::getActors(GraphMap* map, int y_type, int n_type, std::vector<in
 }
 
 void SimpleHero::getEatables(GraphMap* map, std::vector<int>* allEatables) {
-	/* int numActors = map->getNumActors();
-	for (int i = 0; i < numActors; i++) {
-		int actor = map->getActorType(i);
-		if ((actor & ACTOR_EATABLE) && !(actor & ACTOR_DEAD)) {
-			int x, y;
-			map->getActorPosition(i, x, y);
-			int vertex = map->getVertex(x, y);
-			allEatables->push_back(vertex);
-		}
-	} */
 	this->getActors(map, ACTOR_EATABLE, ACTOR_DEAD, allEatables);
 }
 
@@ -136,7 +126,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 		int path_size = path->size();
 
-		if (!path->empty() && (path_size < min_distance || path_size < t_min_distance)) {
+		if (!path->empty() && (path_size < min_distance /* || path_size < t_min_distance */)) {
 			
 			// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
 			for (int& second : *eatables) {
@@ -148,10 +138,10 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 			if (!a_trap) {
 				min_distance = path_size;
 				closest = path->back();
-			} else {
+			} /* else {
 				t_min_distance = path_size;
 				t_closest = path->back();
-			}
+			} */
 		}
 
 		a_trap = false;
