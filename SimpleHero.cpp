@@ -116,6 +116,8 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	unsigned int min_distance = UINT_MAX;
 	// unsigned int t_min_distance = UINT_MAX;
 
+	std::vector<int> best_path;
+
 
 	if (this->goal->empty()) {
 
@@ -144,6 +146,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 				if (!a_trap) {
 					min_distance = path_size;
 					closest = path->back();
+					best_path(path);
 				}
 		}
 	
@@ -151,9 +154,12 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	
 			path->clear();
 		}
+
+		this->goal(best_path);
 	
 		delete path;
 		delete second_path;
+		delete best_path;
 	
 		delete eatables;
 
