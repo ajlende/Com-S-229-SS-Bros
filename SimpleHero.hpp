@@ -9,6 +9,7 @@
 #include "Actor.hpp"
 #include "GraphMap.hpp"
 #include <vector>
+#include <stack>
 
 /**
  * The SimpleHero follows a simple greedy type strategy to collect all of the eatables, however, it also checks to make sure that all other eatables are reachable if it goes to it.
@@ -16,6 +17,9 @@
 class SimpleHero : public Actor
 {
 	protected:
+		std::stack<int>* goal;
+		std::vector<int>* food;
+
 		/**
 		 * Finds the shortest path from vertex start to vertex end in the map.
 		 * Returns true if a path was found and false if no path was found.

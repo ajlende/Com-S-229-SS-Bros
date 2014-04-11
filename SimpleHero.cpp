@@ -12,15 +12,18 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <stack>
 
 SimpleHero::SimpleHero( int type ) : Actor(type) {
 	// TODO: Initialize member variables
-	// auto reachable = new std::vector<int>();
+	this->goal = new std::stack<int>();
+	this->food = new std::vector<int>();
 }
 
 SimpleHero::~SimpleHero() {
 	// TODO: Free all member variables
-	// delete this->reachable;
+	delete this->goal;
+	delete this->food;
 }
 
 bool SimpleHero::findPath(GraphMap* map, int start, int end, std::vector<int>* V) {
@@ -107,52 +110,57 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 	if ( d <= 1 ) return 0;
 
-	auto eatables = new std::vector<int>();
-	this->getEatables(map, eatables);
-
 	int start = map->getVertex(x, y);
 	int closest = 0;
 	int t_closest = 0;
 	unsigned int min_distance = UINT_MAX;
 	unsigned int t_min_distance = UINT_MAX;
+
+
+	if (this->goal->empty()) {
+
+		auto eatables = new std::vector<int>();
+		this->getEatables(map, eatables);
+		
+		auto path = new std::vector<int>();
+		auto second_path = new std::vector<int>();
+		bool a_trap = false;
 	
-	auto path = new std::vector<int>();
-	auto second_path = new std::vector<int>();
-	bool a_trap = false;
-
-	// Look through all the eatables for the closest one
-	for (int& e : *eatables) {
-		this->findPath(map, start, e, path);
-
-		int path_size = path->size();
-
-		if (!path->empty() && (path_size < min_distance /* || path_size < t_min_distance */)) {
-			
-			// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
-			for (int& second : *eatables) {
-				if (e == second) continue;
-				if (!this->findPath(map, e, second, second_path)) a_trap = true;
-				second_path->clear();
-			}
-
-			if (!a_trap) {
-				min_distance = path_size;
-				closest = path->back();
-			} /* else {
-				t_min_distance = path_size;
-				t_closest = path->back();
-			} */
+		// Look through all the eatables for the closest one
+		for (int& e : *eatables) {
+			this->findPath(map, start, e, path);
+	
+			int path_size = path->size();
+	
+			if (!path->empty() && (path_size < min_distance /* || path_size < t_min_distance */)) {
+				
+				// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
+				for (int& second : *eatables) {
+					if (e == second) continue;
+					if (!this->findPath(map, e, second, second_path)) a_trap = true;
+					second_path->clear();
+				}
+	
+				if (!a_trap) {
+					min_distance = path_size;
+					closest = path->back();
+				}
 		}
+	
+			a_trap = false;
+	
+			path->clear();
+		}
+	
+		delete path;
+		delete second_path;
+	
+		delete eatables;
 
-		a_trap = false;
-
-		path->clear();
+	} else (!this->goal->empty()) {
+		closest = this->goal.top();
+		goal->pop();
 	}
-
-	delete path;
-	delete second_path;
-
-	delete eatables;
 
 	int a, b;
 	map->getPosition((closest != 0) ? closest : t_closest, a, b);
