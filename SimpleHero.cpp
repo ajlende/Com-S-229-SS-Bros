@@ -113,7 +113,6 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 
 	int start = map->getVertex(x, y);
 	int closest = 0;
-	int t_closest = 0;
 	unsigned int min_distance = UINT_MAX;
 	// unsigned int t_min_distance = UINT_MAX;
 
@@ -132,7 +131,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	
 			int path_size = path->size();
 	
-			if (!path->empty() && (path_size < min_distance /* || path_size < t_min_distance */)) {
+			if (!path->empty() && (path_size < min_distance)) {
 				
 				// Check to see if there is a path to all other ACTOR_EATABLEs before setting closest
 				for (int& second : *eatables) {
@@ -166,7 +165,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 	}
 
 	int a, b;
-	map->getPosition((closest != 0) ? closest : t_closest, a, b);
+	map->getPosition(closest, a, b);
 	
 	// Figure out which neighbor coresponds to the index that we want to go to.
 	for (int i = 0; i < d; i++) {
