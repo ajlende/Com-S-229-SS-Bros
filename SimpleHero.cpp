@@ -121,7 +121,7 @@ int SimpleHero::selectNeighbor( GraphMap* map, int x, int y ) {
 		auto eatables = new std::vector<int>();
 		this->getEatables(map, eatables);
 
-		for (int& e : eatables) {
+		for (int& e : *eatables) {
 			if (this->findPath(map, start, e, path);)
 				reachable->push_back(e);
 		}
