@@ -11,30 +11,21 @@
 #include <vector>
 #include <deque>
 
+using namespace std;
+
 /**
  * The SimpleHero follows a simple greedy type strategy to collect all of the eatables, however, it also checks to make sure that all other eatables are reachable if it goes to it.
  */
 class SimpleHero : public Actor
 {
 	protected:
-		std::deque<int>* goal;
-		std::vector<int>* food;
-
-		/**
-		 * Finds the shortest path from vertex start to vertex end in the map.
-		 * Returns true if a path was found and false if no path was found.
-		 */
-		bool findPath(GraphMap* map, int start, int end, std::vector<int>* V);
-
-		/**
-		 * Gets all actors with the specified y_type attributes and without the n_type attributes.
-		 */
-		void getActors(GraphMap* map, int y_type, int n_type, std::vector<int>* allActors);
-
+		deque<int>* goal;
+		vector<int>* food;
+		
 		/**
 		 * Gets all of the eatables reamining on the map.
 		 */
-		void getEatables(GraphMap* map, std::vector<int>* allEatables);
+		void getEatables(GraphMap* map, vector<int>* allEatables);
 		
 	public:
 		SimpleHero(int type);
