@@ -6,10 +6,9 @@
 #include <deque>
 #include <algorithm>
 
-using namespace util;
 using namespace std;
 
-bool findPath(GraphMap* map, int start, int end, vector<int>* V) {
+bool util::findPath(GraphMap* map, int start, int end, vector<int>* V) {
 	int   numVerts = map->getNumVertices();
 	bool* visited = new bool[numVerts]();
 	int*  previous = new int[numVerts]();
@@ -70,7 +69,7 @@ bool findPath(GraphMap* map, int start, int end, vector<int>* V) {
 	return true;
 }
 
-void getActors(GraphMap* map, int y_type, int n_type, vector<int>* allActors) {
+void util::getActors(GraphMap* map, int y_type, int n_type, vector<int>* allActors) {
 	int numActors = map->getNumActors();
 	for (int i = 0; i < numActors; i++) {
 		int actor = map->getActorType(i);
