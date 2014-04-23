@@ -10,11 +10,8 @@
 #include <ncurses.h>
 #include <cstdlib>
 #include <climits>
-#include <iostream>
-#include <queue>
 #include <vector>
 #include <deque>
-#include <algorithm>
 
 using namespace std;
 using namespace util;
