@@ -21,11 +21,11 @@
 using namespace std;
 using namespace util;
 
-SmartHero::SmartPowerup(int type) : Actor(type) {
+SmartPowerup::SmartPowerup(int type) : Actor(type) {
 	
 }
 
-SmartHero::~SmartPowerup() {
+SmartPowerup::~SmartPowerup() {
 	
 }
 
