@@ -42,7 +42,7 @@ const char* SmartPowerup::getActorId() {
 	return "smartpowerup";
 }
 
-const char* SmartEmemy::getNetId() {
+const char* SmartPowerup::getNetId() {
 	return "ajlende";
 }
 
