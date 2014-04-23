@@ -11,11 +11,11 @@ CXXFLAGS = -g -Wall -std=c++11
 LIBS = -lncurses
 
 
-MY_DEPS = SimpleHero.hpp
+MY_DEPS = ActorUtil.hpp SimpleHero.hpp SmartHero.hpp SmartEnemy.hpp SmartPowerup.hpp
 DEPS = $(MY_DEPS) Actor.hpp GameManager.hpp GraphMap.hpp OtherActors.hpp Pursuer.hpp
 
 
-MY_OBJ = SimpleHero.o
+MY_OBJ = ActorUtil.o SimpleHero.o SmartHero.o SmartEnemy.o SmartPowerup.o
 OBJ = $(MY_OBJ) Actor.o GameManager.o GraphMap.o OtherActors.o Pursuer.o ssbros.o
 
 

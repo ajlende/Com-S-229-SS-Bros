@@ -1,3 +1,8 @@
+/*
+ * ActorUtil.cpp
+ * by Alex Lende
+ */
+
 #include "Actor.hpp"
 #include "GraphMap.hpp"
 #include "ActorUtil.hpp"

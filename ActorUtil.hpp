@@ -1,5 +1,10 @@
-#ifndef _ACTORUTIL_H_
-#define _ACTORUTIL_H_
+/*
+ * ActorUtil.hpp
+ * by Alex Lende
+ */
+
+#ifndef _ACTORUTIL_HPP_
+#define _ACTORUTIL_HPP_
 
 #include "GraphMap.hpp"
 #include <vector>
@@ -21,4 +26,4 @@ namespace util {
 
 }
 
-#endif
+#endif /* ACTORUTIL_HPP_ */
