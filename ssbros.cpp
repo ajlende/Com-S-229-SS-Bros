@@ -7,9 +7,14 @@
 
 #include "GraphMap.hpp"
 #include "GameManager.hpp"
+
 #include "Actor.hpp"
 #include "OtherActors.hpp"
 #include "SimpleHero.hpp"
+#include "SmartHero.hpp"
+#include "SmartEnemy.hpp"
+#include "SmartPowerup.hpp"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>

@@ -43,7 +43,7 @@ const char* SmartEnemy::getActorId() {
 	return "smartenemy";
 }
 
-const char* SmartEmemy::getNetId() {
+const char* SmartEnemy::getNetId() {
 	return "ajlende";
 }
 
