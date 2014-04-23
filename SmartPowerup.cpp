@@ -29,20 +29,20 @@ SmartHero::~SmartPowerup() {
 	
 }
 
-virtual int SmartPowerup::selectNeighbor(GraphMap* map, int x, int y) {
+int SmartPowerup::selectNeighbor(GraphMap* map, int x, int y) {
 	// TODO
 	return 0;
 }
 
-virtual Actor* SmartPowerup::duplicate() {
+Actor* SmartPowerup::duplicate() {
 	return new SmartPowerup(this->getType());
 }
 
-virtual const char* SmartPowerup::getActorId() {
+const char* SmartPowerup::getActorId() {
 	return "smartpowerup";
 }
 
-virtual const char* SmartEmemy::getNetId() {
+const char* SmartEmemy::getNetId() {
 	return "ajlende";
 }
 

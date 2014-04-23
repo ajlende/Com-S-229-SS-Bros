@@ -36,20 +36,20 @@ SmartHero::~SmartHero() {
 	
 }
 
-virtual int SmartHero::selectNeighbor(GraphMap* map, int x, int y) {
+int SmartHero::selectNeighbor(GraphMap* map, int x, int y) {
 	// TODO
 	return 0;
 }
 
-virtual Actor* SmartHero::duplicate() {
+Actor* SmartHero::duplicate() {
 	return new SmartHero(this->getType());
 }
 
-virtual const char* SmartHero::getActorId() {
+const char* SmartHero::getActorId() {
 	return "smarthero";
 }
 
-virtual const char* SmartHero::getNetId() {
+const char* SmartHero::getNetId() {
 	return "ajlende";
 }
 

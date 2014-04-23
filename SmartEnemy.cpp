@@ -30,20 +30,20 @@ SmartEnemy::~SmartEnemy() {
 	
 }
 
-virtual int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
+int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	// TODO
 	return 0;
 }
 
-virtual Actor* SmartEnemy::duplicate() {
+Actor* SmartEnemy::duplicate() {
 	return new SmartEnemy(this->getType());
 }
 
-virtual const char* SmartEnemy::getActorId() {
+const char* SmartEnemy::getActorId() {
 	return "smartenemy";
 }
 
-virtual const char* SmartEmemy::getNetId() {
+const char* SmartEmemy::getNetId() {
 	return "ajlende";
 }
 

@@ -5,6 +5,7 @@
  * TODO: Allocate structures on the stack because it is faster.
  */
 
+#include "Actor.hpp"
 #include "SimpleHero.hpp"
 #include "ActorUtil.hpp"
 #include <ncurses.h>
