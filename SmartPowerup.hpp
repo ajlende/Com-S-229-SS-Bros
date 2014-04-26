@@ -20,9 +20,8 @@
 #include "GraphMap.hpp"
 #include <vector>
 
-/**
- * 
- */
+using namespace std;
+
 class SmartPowerup : public Actor
 {
 	protected:
