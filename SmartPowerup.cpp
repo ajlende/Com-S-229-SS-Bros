@@ -58,7 +58,7 @@ int SmartPowerup::selectNeighbor(GraphMap* map, int x, int y) {
 	
 	// Look through all the enemies for the closest one
 	for (int& e : *enemies) {
-		if (findPath(map, start, e, path)) {
+		if (findPath(map, start, e, path, ACTOR_HERO)) {
 
 			int path_size = path->size();
 	

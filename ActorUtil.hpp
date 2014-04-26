@@ -18,6 +18,7 @@ namespace util {
 	 * Returns true if a path was found and false if no path was found.
 	 */
 	bool findPath(GraphMap* map, int start, int end, vector<int>* V);
+	bool findPath(GraphMap* map, int start, int end, vector<int>* V, int avoidtype);
 
 	/**
 	 * Gets all actors with the specified y_type attributes and without the n_type attributes.
