@@ -17,6 +17,7 @@
 #include "SmartPowerup.hpp"
 #include "GraphMap.hpp"
 #include "ActorUtil.hpp"
+#include <climits>
 #include <vector>
 
 using namespace std;
