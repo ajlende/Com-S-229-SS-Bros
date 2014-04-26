@@ -18,6 +18,7 @@
 
 #include "Actor.hpp"
 #include "GraphMap.hpp"
+#include <vector>
 
 /**
  * 
