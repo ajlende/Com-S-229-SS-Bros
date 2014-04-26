@@ -25,7 +25,9 @@
 class SmartPowerup : public Actor
 {
 	protected:
-		// TODO: Member variables		
+		// TODO: Member variables
+		void SmartPowerup::getEnemies(GraphMap* map, vector<int>* allEnemies);
+		void SmartPowerup::getHeroes(GraphMap* map, vector<int>* allHeroes);
 	public:
 		SmartPowerup(int type);
 		virtual ~SmartPowerup();
