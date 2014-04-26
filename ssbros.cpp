@@ -21,6 +21,8 @@
 #include <getopt.h>
 #include <string.h>
 
+void helpmsg();
+
 int main( int argc, char** argv ) {
 
 	bool t = false;
@@ -29,41 +31,7 @@ int main( int argc, char** argv ) {
 		if (strcmp(argv[i], "--timer") == 0 || strcmp(argv[i], "-t") == 0) {
 			t = true;
 		} else if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
-			printf(
-				"Usage: ssbros [MAP] [OPTION]...\n"
-				"\n"
-				"Options:\n"
-				"\t--moves #         How many turns to allow before quitting.\n"
-				"\t--[type] [id]     Use the actor with the given id for the given type.\n"
-				"\t--delay-[type] #  Let actors of the given type only make moves every # turns.\n"
-				"\t--delay #         Make every move last # miliseconds.\n"
-				"\t--render-off      Do not render the map, or make timed delays. Useful if you want to use printf for debugging.\n"
-				"\t--window #        gives a hero # moves to eat enemies after eating a powerup.\n"
-				"\n"
-				"Available types:\n"
-				"\thero              Represented as the \x1b[33;1;40m C \x1b[0m in game.\n"
-				"\tenemy             Reptesented as the \x1b[31;1;40m E \x1b[0m in game.\n"
-				"\teatable           Represented as the \x1b[31;1;40m @ \x1b[0m in game.\n"
-				"\tpowerup           Represented as the \x1b[37;1;40m * \x1b[0m in game.\n"
-				"\n"
-				"Available ids:\n"
-				"\tsimplehero        My Simple Hero.\n"
-				"\tsmarthero         My Smart Hero.\n"
-				"\tsmartenemy        My Smart Enemy.\n"
-				"\tsmartpowerup      My Smart Powerup.\n"
-				"\tactor             Stays in the same place.\n"
-				"\trandom            Moves randomly about the map avoiding recent places.\n"
-				"\tkeyboard          Uses they keyboard to control.\n"
-				"\tenemypursuer      Goes after the closest enemy.\n"
-				"\theropursuer       Goes after the closest hero.\n"
-				"\teatablepursuer    Goes after the closest eatable (or powerup).\n"
-				"\tpoweruppursuer    Goes after the closest powerup.\n"
-				"\tenemyavoider      Tries to go as far as possible from all enemies.\n"
-				"\theroavoider       Tries to go as far as possible from all heroes.\n"
-				"\teatableenemypa    Pursues eatables while avoiding enemies.\n"
-				"\tpowerupenemypa    Pursues powerups while avoiding enemies.\n"
-				"\tenemyheropa       Pursues enemies while avoiding heroes.\n"
-			);
+			helpmsg();
 			return 0;
 		}
 	}
@@ -102,4 +70,44 @@ int main( int argc, char** argv ) {
 	free(actors);
 	actors = 0;
 	return 0;
+}
+
+void helpmsg() {
+	printf(
+		"Usage: ssbros [MAP] [OPTION]...\n"
+		"\n"
+		"Options:\n"
+		"\t--moves #         How many turns to allow before quitting.\n"
+		"\t--[TYPE] [ID]     Use the actor with the given ID for the given TYPE.\n"
+		"\t--delay-[TYPE] #  Let actors of the given TYPE only make moves every # turns.\n"
+		"\t--delay #         Make every move last # miliseconds.\n"
+		"\t--render-off      Do not render the map, or make timed delays. Useful if you want to use printf for debugging.\n"
+		"\t--goal [TYPE]     Sets grading criteria for all types except eatable (Used in part B)."
+		"\t--window #        Gives a hero # moves to eat enemies after eating a powerup.\n"
+		"\n"
+		"Types:\n"
+		"\thero              Represented as the \x1b[33;1;40m C \x1b[0m in game.\n"
+		"\tenemy             Reptesented as the \x1b[31;1;40m E \x1b[0m in game.\n"
+		"\teatable           Represented as the \x1b[31;1;40m @ \x1b[0m in game.\n"
+		"\tpowerup           Represented as the \x1b[37;1;40m * \x1b[0m in game.\n"
+		"\n"
+		"IDs:\n"
+		"\tsimplehero        My Simple Hero.\n"
+		"\tsmarthero         My Smart Hero.\n"
+		"\tsmartenemy        My Smart Enemy.\n"
+		"\tsmartpowerup      My Smart Powerup.\n"
+		"\tactor             Stationary actor.\n"
+		"\trandom            Moves randomly about the map avoiding recent places.\n"
+		"\tkeyboard          Uses keyboard input for control.\n"
+		"\tenemypursuer      Goes after the closest enemy.\n"
+		"\theropursuer       Goes after the closest hero.\n"
+		"\teatablepursuer    Goes after the closest eatable (or powerup).\n"
+		"\tpoweruppursuer    Goes after the closest powerup.\n"
+		"\tenemyavoider      Tries to go as far as possible from all enemies.\n"
+		"\theroavoider       Tries to go as far as possible from all heroes.\n"
+		"\teatableenemypa    Pursues eatables while avoiding enemies.\n"
+		"\tpowerupenemypa    Pursues powerups while avoiding enemies.\n"
+		"\tenemyheropa       Pursues enemies while avoiding heroes.\n"
+	);
+
 }
