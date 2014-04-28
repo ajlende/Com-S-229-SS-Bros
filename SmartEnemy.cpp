@@ -126,7 +126,8 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 }
 
 Actor* SmartEnemy::duplicate() {
-	return new SmartEnemy(this->getType(), SmartEnemy::personalityDistribution(SmartEnemy::generator));
+	// return new SmartEnemy(this->getType(), SmartEnemy::personalityDistribution(SmartEnemy::generator));
+	return new SmartEnemy(this->getType(), 1);
 }
 
 const char* SmartEnemy::getActorId() {
