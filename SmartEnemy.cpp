@@ -18,25 +18,113 @@
 #include "SmartEnemy.hpp"
 #include "GraphMap.hpp"
 #include "ActorUtil.hpp"
+#include <vector>
+#include <random>
+#include <chrono>
 
 using namespace std;
+using namespace chrono;
 using namespace util;
 
+// Initializing the random generator and uniform distributors
+unsigned seed = system_clock::now().time_since_epoch().count();
+default_random_engine SmartEnemy::generator(seed);
+uniform_int_distribution<int> SmartEnemy::personalityDistribution(0,2);
+uniform_int_distribution<int> SmartEnemy::generalDistribution(0,99);
+
+
 SmartEnemy::SmartEnemy(int type) : Actor(type) {
-	
+	this->personality = 0;
+}
+
+SmartEnemy::SmartEnemy(int type, int personality) : Actor(type) {
+	this->personality = personality;
 }
 
 SmartEnemy::~SmartEnemy() {
 	
 }
 
+int SmartEnemy::getPersonality() {
+	return this->personality;
+}
+
+void SmartEnemy::getHeroes(GraphMap* map, vector<int>* allEatables) {
+	getActors(map, ACTOR_HERO, ACTOR_DEAD, allEatables);
+}
+
 int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
-	// TODO
+	switch ( this->personality ) {
+	case 1:
+		return this->pursue(map, x, y);
+	case 2:
+		return this->lazyPursue(map, x, y, 25)
+	default:
+		return 0;
+	}
+}
+
+int SmartEnemy::pursue(GraphMap* map, int x, int y) {
+	int d = map->getNumNeighbors(x, y);
+
+	if ( d <= 1 ) return 0;
+
+	int start = map->getVertex(x, y);
+	int closest = 0;
+	unsigned int min_distance = UINT_MAX;
+
+	auto heroes = new vector<int>();
+	this->getHeroes(map, heroes);
+	
+	auto path = new vector<int>();
+	
+	// Look through all the heroes for the closest one
+	for (int& h : *heroes) {
+		if (findPath(map, start, h, path, ACTOR_HERO)) {
+
+			int path_size = path->size();
+	
+			if (!path->empty() && (path_size < min_distance)) {
+				min_distance = path_size;
+				closest = path->back();
+			}
+	
+			path->clear();
+		}
+	}
+	
+	delete path;
+
+	delete heroes;
+
+	int a, b;
+	map->getPosition(closest, a, b);
+	
+	// Figure out which neighbor coresponds to the index that we want to go to.
+	for (int i = 0; i < d; i++) {
+		int p, q;
+		map->getNeighbor(x, y, i, p, q);
+
+		if ( p == a && q == b ) {
+			return i;
+		}
+	}
+
 	return 0;
 }
 
+int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
+	if (generalDistribution(generator) < lazyness) {
+		int d = map->getNumNeighbors(x, y);
+		uniform_int_distribution<int> distribution(0,d);
+		return distribution(this->generator);
+	} else {
+		return this->pursue(map, x, y);
+	}
+}
+
 Actor* SmartEnemy::duplicate() {
-	return new SmartEnemy(this->getType());
+	return new SmartEnemy(this->getType(), personalityDistribution(this->generator));
 }
 
 const char* SmartEnemy::getActorId() {

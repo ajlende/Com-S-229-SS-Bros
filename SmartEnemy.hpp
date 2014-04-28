@@ -19,11 +19,24 @@
 
 #include "Actor.hpp"
 #include "GraphMap.hpp"
+#include <random>
+#include <chrono>
+
+using namespace std;
+using namespace chrono;
 
 class SmartEnemy : public Actor {
+	private:
+		int personality;
+		static default_random_engine generator;
+		static uniform_int_distribution<int> distribution;
 
 	protected:
-		// TODO: Member variables		
+		// TODO: Member variables
+		bool getHeroes(GraphMap* map, vector<int>* allHeroes);
+		int pursue(GraphMap* map, int x, int y);
+		int lazyPursue(GraphMap* map, int x, int y);
+
 	public:
 		SmartEnemy(int type);
 		virtual ~SmartEnemy();
