@@ -23,6 +23,8 @@ class GameManager
 	private:
 		GraphMap* graph;
 
+		int best_score;
+		int num_repeats;
 		int num_actors;
 		int size_actors;
 		Actor** actors;
@@ -68,15 +70,15 @@ class GameManager
 
 		// Special message for ending
 		char* message_buffer;
-		void writeEndMessageAndWait();
+		void writeEndMessageAndWait( int round, GraphMap* map );
 
-		void drawPos( WINDOW* w, int x, int y );
+		void drawPos( GraphMap* map, WINDOW* w, int x, int y );
 
 		/**
 		 * Render the map, using the current set of actors
 		 * and positions
 		 */
-		void render( WINDOW* w );
+		void render( WINDOW* w, GraphMap* map );
 
 	public:
 		/**

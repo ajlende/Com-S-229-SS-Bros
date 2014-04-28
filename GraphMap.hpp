@@ -55,6 +55,11 @@ class GraphMap
 		int* actor_positions;
 		int* actor_types;
 
+		int delay_hero;
+		int delay_eatable;
+		int delay_powerup;
+		int delay_enemy;
+
 		/**
 		 * Modify the actors, used by GameManager
 		 */
@@ -69,9 +74,13 @@ class GraphMap
 		int getSpecialType( int i );
 
 		char** map_chars;
-		char getMapChar(int x, int y);
+		char getMapChar( int x, int y );
+
 
 	public:
+
+		GraphMap(GraphMap& map);
+
 		/**
 		 * Load a graph from a file, using the game-board format.
 		 */
@@ -114,10 +123,21 @@ class GraphMap
 		 */
 		void getActorPosition( int i, int& x, int& y );
 
-		inline int getWidth() { return this->w; }
-		inline int getHeight() { return this->h; }
-		int getVertex(int x, int y);
-		void getPosition(int v, int& x, int& y);
+		inline int getWidth()
+		{
+			return this->w;
+		}
+		inline int getHeight()
+		{
+			return this->h;
+		}
+		int getVertex( int x, int y );
+		void getPosition( int v, int& x, int& y );
+
+		int getDelayHero();
+		int getDelayEnemy();
+		int getDelayEatable();
+		int getDelayPowerup();
 
 		void print();
 };
