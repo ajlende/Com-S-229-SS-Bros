@@ -37,12 +37,12 @@ uniform_int_distribution<int> SmartEnemy::generalDistribution(0,99);
 
 
 SmartEnemy::SmartEnemy(int type) : Actor(type) {
-	printf("Constructor 1 called\n");
+	// printf("Constructor 1 called\n");
 	this->personality = 0;
 }
 
 SmartEnemy::SmartEnemy(int type, int personality) : Actor(type) {
-	printf("Constructor 2 called\n");
+	// printf("Constructor 2 called\n");
 	this->personality = personality;
 }
 
@@ -61,13 +61,13 @@ void SmartEnemy::getHeroes(GraphMap* map, vector<int>* allEatables) {
 int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	switch ( this->personality ) {
 	case 1:
-		printf("Selecting for pursue\n");
+		// printf("Selecting for pursue\n");
 		return this->pursue(map, x, y);
 	case 2:
-		printf("Selecting for lazyPursue\n");
+		// printf("Selecting for lazyPursue\n");
 		return this->lazyPursue(map, x, y, 50);
 	default:
-		printf("Selecting default\n");
+		// printf("Selecting default\n");
 		return 0;
 	}
 }
@@ -125,17 +125,17 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 	if (SmartEnemy::generalDistribution(SmartEnemy::generator) < lazyness) {
 		int d = map->getNumNeighbors(x, y);
 		uniform_int_distribution<int> distribution(0,d-1);
-		printf("!!! lazyPursue - random\n");
+		// printf("!!! lazyPursue - random\n");
 		return distribution(SmartEnemy::generator);
 	} else {
-		printf("lazyPursue - pursue\n");
+		// printf("lazyPursue - pursue\n");
 		return this->pursue(map, x, y);
 	}
 }
 
 Actor* SmartEnemy::duplicate() {
 	int p = SmartEnemy::personalityDistribution(SmartEnemy::generator);
-	printf("Creating SmartEnemy Type: %d\n", p);
+	// printf("Creating SmartEnemy Type: %d\n", p);
 	return new SmartEnemy(this->getType(), p);
 	// return new SmartEnemy(this->getType(), 1);
 }
