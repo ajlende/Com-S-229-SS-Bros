@@ -59,7 +59,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	case 1:
 		return this->pursue(map, x, y);
 	case 2:
-		return this->lazyPursue(map, x, y, 25)
+		return this->lazyPursue(map, x, y, 25);
 	default:
 		return 0;
 	}
