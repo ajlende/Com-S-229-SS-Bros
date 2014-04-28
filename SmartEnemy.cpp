@@ -130,7 +130,7 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 				return i;
 			}
 		}
-		return 0;
+		return 25;
 	} else {
 		return this->pursue(map, x, y);
 	}
