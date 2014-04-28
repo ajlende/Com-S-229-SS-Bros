@@ -18,6 +18,7 @@
 #include "SmartEnemy.hpp"
 #include "GraphMap.hpp"
 #include "ActorUtil.hpp"
+#include <climits>
 #include <vector>
 #include <random>
 #include <chrono>

@@ -29,16 +29,19 @@ class SmartEnemy : public Actor {
 	private:
 		int personality;
 		static default_random_engine generator;
-		static uniform_int_distribution<int> distribution;
+		static uniform_int_distribution<int> personalityDistribution;
+		static uniform_int_distribution<int> generalDistribution;		
 
 	protected:
 		// TODO: Member variables
 		bool getHeroes(GraphMap* map, vector<int>* allHeroes);
+		int getPersonality();
 		int pursue(GraphMap* map, int x, int y);
-		int lazyPursue(GraphMap* map, int x, int y);
+		int lazyPursue(GraphMap* map, int x, int y, int lazyness);
 
 	public:
 		SmartEnemy(int type);
+		SmartEnemy(int type, int personality);
 		virtual ~SmartEnemy();
 		virtual int selectNeighbor(GraphMap* map, int x, int y);
 		virtual Actor* duplicate();
