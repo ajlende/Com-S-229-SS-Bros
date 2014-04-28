@@ -30,15 +30,17 @@ using namespace util;
 // Initializing the random generator and uniform distributors
 unsigned seed = system_clock::now().time_since_epoch().count();
 default_random_engine SmartEnemy::generator(seed);
-uniform_int_distribution<int> SmartEnemy::personalityDistribution(0,2);
+uniform_int_distribution<int> SmartEnemy::personalityDistribution(1,2);
 uniform_int_distribution<int> SmartEnemy::generalDistribution(0,99);
 
 
 SmartEnemy::SmartEnemy(int type) : Actor(type) {
+	printf("Constructor 1 called\n");
 	this->personality = 0;
 }
 
 SmartEnemy::SmartEnemy(int type, int personality) : Actor(type) {
+	printf("Constructor 2 called\n");
 	this->personality = personality;
 }
 
@@ -120,7 +122,7 @@ int SmartEnemy::pursue(GraphMap* map, int x, int y) {
 int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 	if (SmartEnemy::generalDistribution(SmartEnemy::generator) < lazyness) {
 		int d = map->getNumNeighbors(x, y);
-		uniform_int_distribution<int> distribution(0,d);
+		uniform_int_distribution<int> distribution(0,d-1);
 		printf("lazyPursue - random\n");
 		return distribution(SmartEnemy::generator);
 	} else {
