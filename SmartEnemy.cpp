@@ -23,6 +23,8 @@
 #include <random>
 #include <chrono>
 
+#define NUM_PERSONALITIES 2
+
 using namespace std;
 using namespace chrono;
 using namespace util;
@@ -30,7 +32,7 @@ using namespace util;
 // Initializing the random generator and uniform distributors
 unsigned seed = system_clock::now().time_since_epoch().count();
 default_random_engine SmartEnemy::generator(seed);
-uniform_int_distribution<int> SmartEnemy::personalityDistribution(1,2);
+uniform_int_distribution<int> SmartEnemy::personalityDistribution(1,NUM_PERSONALITIES);
 uniform_int_distribution<int> SmartEnemy::generalDistribution(0,99);
 
 
@@ -123,7 +125,7 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 	if (SmartEnemy::generalDistribution(SmartEnemy::generator) < lazyness) {
 		int d = map->getNumNeighbors(x, y);
 		uniform_int_distribution<int> distribution(0,d-1);
-		printf("lazyPursue - random\n");
+		printf("!!! lazyPursue - random\n");
 		return distribution(SmartEnemy::generator);
 	} else {
 		printf("lazyPursue - pursue\n");
