@@ -121,16 +121,19 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 	if (SmartEnemy::generalDistribution(SmartEnemy::generator) < lazyness) {
 		int d = map->getNumNeighbors(x, y);
 		uniform_int_distribution<int> distribution(0,d);
-
+		printf("lazyPursue - random\n");
 		return distribution(SmartEnemy::generator);
 	} else {
+		printf("lazyPursue - pursue\n");
 		return this->pursue(map, x, y);
 	}
 }
 
 Actor* SmartEnemy::duplicate() {
-	// return new SmartEnemy(this->getType(), SmartEnemy::personalityDistribution(SmartEnemy::generator));
-	return new SmartEnemy(this->getType(), 1);
+	int p = SmartEnemy::personalityDistribution(SmartEnemy::generator);
+	printf("Creating SmartEnemy Type: %d", p);
+	return new SmartEnemy(this->getType(), p);
+	// return new SmartEnemy(this->getType(), 1);
 }
 
 const char* SmartEnemy::getActorId() {
