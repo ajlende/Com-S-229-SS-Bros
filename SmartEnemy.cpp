@@ -59,7 +59,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	case 1:
 		return this->pursue(map, x, y);
 	case 2:
-		return this->lazyPursue(map, x, y, 25);
+		return this->lazyPursue(map, x, y, 1);
 	default:
 		return 0;
 	}
@@ -115,29 +115,18 @@ int SmartEnemy::pursue(GraphMap* map, int x, int y) {
 }
 
 int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
-	if (generalDistribution(generator) < lazyness) {
+	if (SmartEnemy::generalDistribution(SmartEnemy::generator) < lazyness) {
 		int d = map->getNumNeighbors(x, y);
 		uniform_int_distribution<int> distribution(0,d);
-		
-		int a, b;
-		map->getPosition(distribution(generator), a, b);
-	
-		// Figure out which neighbor coresponds to the index that we want to go to.
-		for (int i = 0; i < d; i++) {
-			int p, q;
-			map->getNeighbor(x, y, i, p, q);
-			if ( p == a && q == b ) {
-				return i;
-			}
-		}
-		return 25;
+
+		return distribution(SmartEnemy::generator);
 	} else {
 		return this->pursue(map, x, y);
 	}
 }
 
 Actor* SmartEnemy::duplicate() {
-	return new SmartEnemy(this->getType(), personalityDistribution(this->generator));
+	return new SmartEnemy(this->getType(), SmartEnemy::personalityDistribution(SmartEnemy::generator));
 }
 
 const char* SmartEnemy::getActorId() {
