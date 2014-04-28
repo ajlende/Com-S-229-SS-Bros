@@ -59,6 +59,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	case 1:
 		return this->pursue(map, x, y);
 	case 2:
+		printf("Selecting for lazyPursue\n");
 		return this->lazyPursue(map, x, y, 1);
 	default:
 		return 0;
