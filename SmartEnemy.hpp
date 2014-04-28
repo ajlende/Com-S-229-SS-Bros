@@ -34,7 +34,7 @@ class SmartEnemy : public Actor {
 
 	protected:
 		// TODO: Member variables
-		bool getHeroes(GraphMap* map, vector<int>* allHeroes);
+		void getHeroes(GraphMap* map, vector<int>* allHeroes);
 		int getPersonality();
 		int pursue(GraphMap* map, int x, int y);
 		int lazyPursue(GraphMap* map, int x, int y, int lazyness);
