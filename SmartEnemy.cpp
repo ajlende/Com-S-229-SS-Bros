@@ -84,7 +84,7 @@ int SmartEnemy::pursue(GraphMap* map, int x, int y) {
 	
 	// Look through all the heroes for the closest one
 	for (int& h : *heroes) {
-		if (findPath(map, start, h, path, ACTOR_HERO)) {
+		if (findPath(map, start, h, path)) {
 
 			int path_size = path->size();
 	
