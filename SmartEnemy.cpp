@@ -57,11 +57,13 @@ void SmartEnemy::getHeroes(GraphMap* map, vector<int>* allEatables) {
 int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	switch ( this->personality ) {
 	case 1:
+		printf("Selecting for pursue\n");
 		return this->pursue(map, x, y);
 	case 2:
 		printf("Selecting for lazyPursue\n");
 		return this->lazyPursue(map, x, y, 1);
 	default:
+		printf("Selecting default\n");
 		return 0;
 	}
 }
