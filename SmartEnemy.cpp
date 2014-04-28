@@ -131,7 +131,7 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 
 Actor* SmartEnemy::duplicate() {
 	int p = SmartEnemy::personalityDistribution(SmartEnemy::generator);
-	printf("Creating SmartEnemy Type: %d", p);
+	printf("Creating SmartEnemy Type: %d\n", p);
 	return new SmartEnemy(this->getType(), p);
 	// return new SmartEnemy(this->getType(), 1);
 }
