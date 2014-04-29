@@ -70,6 +70,7 @@ class GameManager
 
 		// Special message for ending
 		char* message_buffer;
+		void computeRoundScore( int round, GraphMap* map );
 		void writeEndMessageAndWait( int round, GraphMap* map );
 
 		void drawPos( GraphMap* map, WINDOW* w, int x, int y );
