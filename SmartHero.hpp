@@ -26,10 +26,7 @@ using namespace std;
 
 class SmartHero : public Actor {
 
-	protected:
-		deque<int>* goal;
-		vector<int>* food;
-		
+	protected:		
 		/**
 		 * Gets all of the eatables reamining on the map.
 		 */
