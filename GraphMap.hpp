@@ -16,6 +16,7 @@
 #define SPECIAL_POWERUP_SPAWN 8
 
 class GameManager;
+class Melee;
 
 /**
  * The Graph class contains a simple data structure for reading from a (directed) graph.
@@ -30,6 +31,7 @@ class GraphMap
 		 * Give GameManager special privileges to access protected members of GraphMap.
 		 */
 		friend class GameManager;
+		friend class Melee;
 	protected:
 		int num_vertices;
 		int* vertex_x;
@@ -73,13 +75,13 @@ class GraphMap
 		int getNumSpecial();
 		int getSpecialType( int i );
 
-		char** map_chars;
-		char getMapChar( int x, int y );
+		int** map_chars;
+		int getMapChar( int x, int y );
 
 
 	public:
 
-		GraphMap(GraphMap& map);
+		GraphMap(const GraphMap& map);
 
 		/**
 		 * Load a graph from a file, using the game-board format.

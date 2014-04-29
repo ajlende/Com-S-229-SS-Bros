@@ -51,6 +51,7 @@ int RandomActor::selectNeighbor( GraphMap* map, int x, int y )
 	bool choice_in_avoid_list = false;
 	int count = 0;
 	int p = -1;
+
 	do
 	{
 		choice = (rand() % d);

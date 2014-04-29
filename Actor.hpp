@@ -18,10 +18,12 @@
 #define ACTOR_DEAD    16
 
 class GameManager;
+class Melee;
 
 class Actor
 {
 		friend class GameManager;
+		friend class Melee;
 	private:
 		int type;
 		int iteration;
