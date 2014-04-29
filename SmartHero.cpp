@@ -18,6 +18,7 @@
 #include "SmartHero.hpp"
 #include "GraphMap.hpp"
 #include "ActorUtil.hpp"
+#include <climits>
 #include <vector>
 #include <deque>
 
