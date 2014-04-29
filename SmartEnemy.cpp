@@ -66,6 +66,8 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	case 2:
 		// printf("Selecting for lazyPursue\n");
 		return this->lazyPursue(map, x, y, 50);
+	case 3:
+		return this->eatableGuard(map, x, y);
 	default:
 		// printf("Selecting default\n");
 		return 0;
@@ -131,6 +133,10 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 		// printf("lazyPursue - pursue\n");
 		return this->pursue(map, x, y);
 	}
+}
+
+int SmartEnemy::eatableGuard(GraphMap* map, int x, int y) {
+	return 0;
 }
 
 Actor* SmartEnemy::duplicate() {

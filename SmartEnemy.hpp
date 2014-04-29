@@ -38,6 +38,7 @@ class SmartEnemy : public Actor {
 		int getPersonality();
 		int pursue(GraphMap* map, int x, int y);
 		int lazyPursue(GraphMap* map, int x, int y, int lazyness);
+		int eatableGuard(GraphMap* map, int x, int y);
 
 	public:
 		SmartEnemy(int type);
