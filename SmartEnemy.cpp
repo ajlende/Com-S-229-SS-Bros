@@ -35,6 +35,8 @@ default_random_engine SmartEnemy::generator(seed);
 uniform_int_distribution<int> SmartEnemy::personalityDistribution(1,NUM_PERSONALITIES);
 uniform_int_distribution<int> SmartEnemy::generalDistribution(0,99);
 
+printf("Seed: %u", seed);
+
 
 SmartEnemy::SmartEnemy(int type) : Actor(type) {
 	// printf("Constructor 1 called\n");
