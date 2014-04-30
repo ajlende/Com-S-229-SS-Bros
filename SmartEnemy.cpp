@@ -66,10 +66,12 @@ void SmartEnemy::getHeroes(GraphMap* map, vector<int>* allEatables) {
 int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 
 	// If we are on a new map, then re-evaluate the personalities
-	if (map != this->oldmap) {
+	if ((GraphMap*)map != (GraphMap*)this->oldmap) {
 		this->oldmap = map;
-		this->personality = this->personalityDistribution(this->generator);
+		this->personality = SmartEnemy::personalityDistribution(SmartEnemy::generator);
 		printf("New Personality: %d\n", this->personality);
+	} else {
+		printf("samemap");
 	}
 
 	switch ( this->personality ) {
@@ -154,9 +156,9 @@ int SmartEnemy::eatableGuard(GraphMap* map, int x, int y) {
 }
 
 Actor* SmartEnemy::duplicate() {
-	int p = SmartEnemy::personalityDistribution(SmartEnemy::generator);
-	printf("Creating SmartEnemy Type: %d\n", p);
-	return new SmartEnemy(this->getType(), p);
+	// int p = SmartEnemy::personalityDistribution(SmartEnemy::generator);
+	// printf("Creating SmartEnemy Type: %d\n", p);
+	return new SmartEnemy(this->getType());
 	// return new SmartEnemy(this->getType(), 1);
 }
 
