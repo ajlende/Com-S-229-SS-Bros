@@ -69,7 +69,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 	if (map != this->oldmap) {
 		this->oldmap = map;
 		this->personality = SmartEnemy::personalityDistribution(SmartEnemy::generator);
-		printf("New Personality: %d\n", this->personality);
+		// printf("New Personality: %d\n", this->personality);
 	} else {
 		// printf("MapPtr: %0X\n", map);
 	}

@@ -240,7 +240,7 @@ bool util::searchAll(GraphMap* map, int start, int searchtype) {
 
 			// Check to see if the current vertex is one of the vertexes with an actor with the searchtype at it's position
 			for (auto a : *V) if (a == vertex) {
-				printf("Found at vertex: %d\n", vertex);
+				// printf("Found at vertex: %d\n", vertex);
 				return true;
 			}
 
@@ -291,7 +291,7 @@ bool util::searchRadiusRec(GraphMap* map, int vertex, int radius, int searchtype
 	visited[vertex] = true;
 
 	for (auto a : *searchvect) if (a == vertex) {
-		printf("Rec found at vertex: %d\n", vertex);
+		// printf("Rec found at vertex: %d\n", vertex);
 		searchflag = true;
 		return true;
 	}
