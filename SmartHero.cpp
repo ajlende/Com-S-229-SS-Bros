@@ -53,7 +53,7 @@ int SmartHero::selectNeighbor(GraphMap* map, int x, int y) {
 	
 	// Look through all the eatables for the closest one
 	for (int& e : *eatables) {
-		if (findPath(map, start, e, path, ACTOR_ENEMY, map->getDelayHero() - map->getDelayEnemy() + 1)) {
+		if (findPath(map, start, e, path, ACTOR_ENEMY/*, map->getDelayHero() - map->getDelayEnemy() + 1*/)) {
 
 			int path_size = path->size();
 	
