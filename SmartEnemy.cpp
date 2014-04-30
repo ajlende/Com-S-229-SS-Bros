@@ -71,7 +71,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 		this->personality = SmartEnemy::personalityDistribution(SmartEnemy::generator);
 		printf("New Personality: %d\n", this->personality);
 	} else {
-		printf("samemap");
+		printf("MapPtr: %0X", map);
 	}
 
 	switch ( this->personality ) {
