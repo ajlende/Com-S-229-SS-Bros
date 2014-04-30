@@ -80,7 +80,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 		return this->pursue(map, x, y);
 	case 2:
 		// printf("Selecting for lazyPursue\n");
-		return this->lazyPursue(map, x, y, 60);
+		return this->lazyPursue(map, x, y, 90);
 	case 3:
 		// printf("selecting for eatableGuard\n");
 		return this->eatableGuard(map, x, y);
