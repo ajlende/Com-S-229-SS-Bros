@@ -28,6 +28,7 @@ using namespace chrono;
 class SmartEnemy : public Actor {
 	private:
 		int personality;
+		GraphMap* oldmap;
 		static default_random_engine generator;
 		static uniform_int_distribution<int> personalityDistribution;
 		static uniform_int_distribution<int> generalDistribution;		

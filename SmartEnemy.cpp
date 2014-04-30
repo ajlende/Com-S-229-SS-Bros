@@ -41,11 +41,13 @@ uniform_int_distribution<int> SmartEnemy::generalDistribution(0,99);
 SmartEnemy::SmartEnemy(int type) : Actor(type) {
 	// printf("Constructor 1 called\n");
 	this->personality = 0;
+	this->oldmap = 0;
 }
 
 SmartEnemy::SmartEnemy(int type, int personality) : Actor(type) {
 	// printf("Constructor 2 called\n");
 	this->personality = personality;
+	this->oldmap = 0;
 }
 
 SmartEnemy::~SmartEnemy() {
@@ -60,7 +62,16 @@ void SmartEnemy::getHeroes(GraphMap* map, vector<int>* allEatables) {
 	getActors(map, ACTOR_HERO, ACTOR_DEAD, allEatables);
 }
 
+// TODO check to see if the old map pointer equals the new map pointer
 int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
+
+	// If we are on a new map, then re-evaluate the personalities
+	if (map != this->oldmap) {
+		this->oldmap = map;
+		this->personality = this->personalityDistribution(this->generator);
+		printf("New Personality: %d\n", this->personality);
+	}
+
 	switch ( this->personality ) {
 	case 1:
 		// printf("Selecting for pursue\n");
@@ -69,7 +80,9 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 		// printf("Selecting for lazyPursue\n");
 		return this->lazyPursue(map, x, y, 50);
 	case 3:
-		return this->eatableGuard(map, x, y);
+		// printf("selecting for eatableGuard\n");
+		int radius = map->getDelayHero();
+		return this->eatableGuard(map, x, y, radius);
 	default:
 		// printf("Selecting default\n");
 		return 0;
@@ -137,7 +150,7 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 	}
 }
 
-int SmartEnemy::eatableGuard(GraphMap* map, int x, int y) {
+int SmartEnemy::eatableGuard(GraphMap* map, int x, int y, int radius) {
 	return 0;
 }
 
