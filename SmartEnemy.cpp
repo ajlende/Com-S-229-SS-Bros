@@ -66,7 +66,7 @@ void SmartEnemy::getHeroes(GraphMap* map, vector<int>* allEatables) {
 int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 
 	// If we are on a new map, then re-evaluate the personalities
-	if ((GraphMap*)map != (GraphMap*)this->oldmap) {
+	if (map != this->oldmap) {
 		this->oldmap = map;
 		this->personality = SmartEnemy::personalityDistribution(SmartEnemy::generator);
 		printf("New Personality: %d\n", this->personality);
