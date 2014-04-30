@@ -146,6 +146,77 @@ bool util::findPath(GraphMap* map, int start, int end, vector<int>* V, int avoid
 	return true;
 }
 
+bool util::findPath(GraphMap* map, int start, int end, vector<int>* V, int avoidtype, int radius) {
+	int   numVerts = map->getNumVertices();
+	bool* visited = new bool[numVerts]();
+	int*  previous = new int[numVerts]();
+
+	auto Q = new queue<int>();
+
+	auto avoid = new vector<int>();
+	util::getActors(map, avoidtype, ACTOR_DEAD, avoid);
+
+	previous[start] = start;
+	visited[start] = true;
+	Q->push(start);
+
+	while (!Q->empty()) {
+		int vertex = Q->front();
+		Q->pop();
+
+		// Get an array of the vertex's neighbors
+		int x, y;
+		map->getPosition(vertex, x, y);
+		int numNeighbors = map->getNumNeighbors(x, y);
+		int* neighbors = new int[numNeighbors]();
+		
+		for (int i = 0; i < numNeighbors; i++) {
+			int a, b, vert;
+			map->getNeighbor(x, y, i, a, b);
+			vert = map->getVertex(a, b);
+			if (searchRadius(map, vert, avoidtype, radius)) {
+				// We found something that we want to avoid, so it no longer counts as a neighbor
+				numNeighbors--;
+			} else {
+				// We didn't find something that we want to avoid, so it's okay to add it to the list of neighbors.
+				neighbors[i] = vert;
+			}
+		}
+		
+
+		// For each of the neighbors, if it isn't visited, then put it on the queue and mark the vertex that we came from to reach it
+		for (int n = 0; n < numNeighbors; n++) {
+			if (!visited[neighbors[n]]) {
+				visited[neighbors[n]] = true;
+				previous[neighbors[n]] = vertex;
+				Q->push(neighbors[n]);
+			}
+		}
+
+		delete[] neighbors;
+
+		if (visited[end]) break;
+
+	}
+	
+	// If the end vertex hasn't been visited, then there is no path
+	if (!visited[end]) {
+		return false;
+	} else {
+		int n = end;
+		while (n != start) {
+			V->push_back(n);
+			n = previous[n];
+		}
+	}
+
+	delete[] visited;
+	delete[] previous;
+	delete Q;
+
+	return true;
+}
+
 bool util::searchAll(GraphMap* map, int start, int searchtype) {
 
 	int numVerts = map->getNumVertices();
@@ -194,6 +265,8 @@ bool util::searchAll(GraphMap* map, int start, int searchtype) {
 }
 
 bool util::searchRadius(GraphMap* map, int start, int radius, int searchtype) {
+	if (radius < 0) radius = 0;
+
 	bool searchflag = false;
 
 	int numVerts = map->getNumVertices();

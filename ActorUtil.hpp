@@ -19,6 +19,7 @@ namespace util {
 	 */
 	bool findPath(GraphMap* map, int start, int end, vector<int>* V);
 	bool findPath(GraphMap* map, int start, int end, vector<int>* V, int avoidtype);
+	bool findPath(GraphMap* map, int start, int end, vector<int>* V, int avoidtype, int radius);
 	bool searchAll(GraphMap* map, int start, int searchtype);
 	bool searchRadius(GraphMap* map, int start, int radius, int searchtype);
 	bool searchRadiusRec(GraphMap* map, int vertex, int radius, int searchtype, bool* visited, vector<int>* searchvect, bool& searchflag);
