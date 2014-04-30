@@ -23,7 +23,7 @@
 #include <random>
 #include <chrono>
 
-#define NUM_PERSONALITIES 2
+#define NUM_PERSONALITIES 3
 
 using namespace std;
 using namespace chrono;
@@ -80,7 +80,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 		return this->pursue(map, x, y);
 	case 2:
 		// printf("Selecting for lazyPursue\n");
-		return this->lazyPursue(map, x, y, 70);
+		return this->lazyPursue(map, x, y, 60);
 	case 3:
 		// printf("selecting for eatableGuard\n");
 		return this->eatableGuard(map, x, y);
@@ -152,6 +152,7 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 }
 
 int SmartEnemy::eatableGuard(GraphMap* map, int x, int y) {
+	searchRadius(map, map->getVertex(x,y), 2, ACTOR_HERO);
 	return 0;
 }
 
