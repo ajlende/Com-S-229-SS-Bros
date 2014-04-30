@@ -31,6 +31,7 @@ class SmartHero : public Actor {
 		 * Gets all of the eatables reamining on the map.
 		 */
 		void getEatables(GraphMap* map, vector<int>* allEatables);
+		void runAway(GraphMap* map, int x, int y);
 		
 	public:
 		SmartHero(int type);
