@@ -152,13 +152,13 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 }
 
 int SmartEnemy::eatableGuard(GraphMap* map, int x, int y) {
-	if (searchRadius(map, map->getVertex(x,y), map->getDelayHero() - map->getDelayEnemy() + 1, ACTOR_HERO)) {
+	if (searchRadius(map, map->getVertex(x,y), map->getDelayHero() - map->getDelayEnemy() + 2, ACTOR_HERO)) {
 		// If the enemy can nearly reach him pursue
 		return this->pursue(map, x, y);
 		printf("Enemy in range!\n");
 	} else {
 		// Otherwise, move about randomly
-		return this->lazyPursue(map, x, y, 70);
+		return this->lazyPursue(map, x, y, 40);
 	}
 }
 
