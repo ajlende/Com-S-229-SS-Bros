@@ -23,7 +23,7 @@
 #include <random>
 #include <chrono>
 
-#define NUM_PERSONALITIES 3
+#define NUM_PERSONALITIES 2
 
 using namespace std;
 using namespace chrono;
