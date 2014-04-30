@@ -148,8 +148,6 @@ bool util::findPath(GraphMap* map, int start, int end, vector<int>* V, int avoid
 
 bool util::searchAll(GraphMap* map, int start, int searchtype) {
 
-	int depth = 0;
-
 	int numVerts = map->getNumVertices();
 	bool* visited = new bool[numVerts]();
 	
@@ -165,7 +163,7 @@ bool util::searchAll(GraphMap* map, int start, int searchtype) {
 		int vertex = S->top();
 		S->pop();
 
-		if (!visited[vertex] && depth < radius) {
+		if (!visited[vertex]) {
 
 			visited[vertex] = true;
 
@@ -212,7 +210,7 @@ bool util::searchRadius(GraphMap* map, int start, int radius, int searchtype) {
 	return result;
 }
 
-bool util::searchRadiusRec(GraphMap* map, int vertex, int radius, int searchtype, bool* visited, vactor<int>* searchvect, bool& searchflag) {
+bool util::searchRadiusRec(GraphMap* map, int vertex, int radius, int searchtype, bool* visited, vector<int>* searchvect, bool& searchflag) {
 	if (radius < 0) {
 		return searchflag;
 	}
@@ -240,6 +238,7 @@ bool util::searchRadiusRec(GraphMap* map, int vertex, int radius, int searchtype
 		}
 	}
 
+	return searchflag;
 }
 
 void util::getActors(GraphMap* map, int y_type, int n_type, vector<int>* allActors) {
