@@ -81,8 +81,7 @@ int SmartEnemy::selectNeighbor(GraphMap* map, int x, int y) {
 		return this->lazyPursue(map, x, y, 50);
 	case 3:
 		// printf("selecting for eatableGuard\n");
-		int radius = map->getDelayHero();
-		return this->eatableGuard(map, x, y, radius);
+		return this->eatableGuard(map, x, y);
 	default:
 		// printf("Selecting default\n");
 		return 0;
@@ -150,7 +149,7 @@ int SmartEnemy::lazyPursue(GraphMap* map, int x, int y, int lazyness) {
 	}
 }
 
-int SmartEnemy::eatableGuard(GraphMap* map, int x, int y, int radius) {
+int SmartEnemy::eatableGuard(GraphMap* map, int x, int y) {
 	return 0;
 }
 
