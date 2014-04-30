@@ -146,7 +146,7 @@ bool util::findPath(GraphMap* map, int start, int end, vector<int>* V, int avoid
 	return true;
 }
 
-bool util::searchRadius(GraphMap* map, int start, int radius, int searchtype) {
+bool util::searchAll(GraphMap* map, int start, int searchtype) {
 
 	int depth = 0;
 
@@ -195,6 +195,52 @@ bool util::searchRadius(GraphMap* map, int start, int radius, int searchtype) {
 	return false;
 }
 
+bool util::searchRadius(GraphMap* map, int start, int radius, int searchtype) {
+	bool searchflag = false;
+
+	int numVerts = map->getNumVertices();
+	bool* visited = new bool[numVerts]();
+
+	auto searchvect = new vector<int>();
+	getActors(map, searchtype, ACTOR_DEAD, searchvect);
+
+	bool result = searchRadiusRec(map, start, radius, searchtype, visited, searchvect, searchflag);
+
+	delete[] visited;
+	delete searchvect;
+
+	return result;
+}
+
+bool util::searchRadiusRec(GraphMap* map, int vertex, int radius, int searchtype, bool* visited, vactor<int>* searchvect, bool& searchflag) {
+	if (radius < 0) {
+		return searchflag;
+	}
+
+	visited[vertex] = true;
+
+	for (auto a : *searchvect) if (a == vertex) {
+		printf("Rec found at vertex: %d\n", vertex);
+		searchflag = true;
+		return true;
+	}
+	
+	// Get an array of the vertex's neighbors
+	int x, y;
+	map->getPosition(vertex, x, y);
+	int numNeighbors = map->getNumNeighbors(x, y);
+	// int* neighbors = new int[numNeighbors]();
+	
+	for (int i = 0; i < numNeighbors; i++) {
+		int a, b;
+		map->getNeighbor(x, y, i, a, b);
+		int nextneighbor = map->getVertex(a, b);
+		if (!visited[nextneighbor]) {
+			searchRadiusRec(map, nextneighbor, radius-1, searchtype, visited, searchvect, searchflag);
+		}
+	}
+
+}
 
 void util::getActors(GraphMap* map, int y_type, int n_type, vector<int>* allActors) {
 	int numActors = map->getNumActors();
