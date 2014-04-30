@@ -19,6 +19,7 @@ namespace util {
 	 */
 	bool findPath(GraphMap* map, int start, int end, vector<int>* V);
 	bool findPath(GraphMap* map, int start, int end, vector<int>* V, int avoidtype);
+	bool searchRadius(GraphMap* map, int start, int end, int radius, int searchtype);
 
 	/**
 	 * Gets all actors with the specified y_type attributes and without the n_type attributes.

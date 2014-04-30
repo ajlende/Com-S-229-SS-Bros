@@ -7,6 +7,7 @@
 #include "GraphMap.hpp"
 #include "ActorUtil.hpp"
 #include <queue>
+#include <stack>
 #include <vector>
 #include <deque>
 #include <algorithm>
@@ -144,6 +145,56 @@ bool util::findPath(GraphMap* map, int start, int end, vector<int>* V, int avoid
 
 	return true;
 }
+
+bool util::searchRadius(GraphMap* map, int start, int radius, int searchtype) {
+
+	int depth = 0;
+
+	int numVerts = map->getNumVertices();
+	bool* visited = new bool[numVerts]();
+	
+	auto V = new vector<int>();
+	getActors(map, searchtype, ACTOR_DEAD, V);
+
+	auto S = new stack<int>();
+
+	S->push(start);
+
+	while (!S->empty()) {
+
+		int vertex = S->top();
+		S->pop();
+
+		if (!visited[vertex] && depth < radius) {
+
+			visited[vertex] = true;
+
+			// Check to see if the current vertex is one of the vertexes with an actor with the searchtype at it's position
+			for (auto a : *V) if (a == vertex) {
+				printf("Found at vertex: %d\n", vertex);
+				return true;
+			}
+
+			int x, y;
+			map->getPosition(vertex, x, y);
+			int numNeighbors = map->getNumNeighbors(x, y);
+		
+			for (int i = 0; i < numNeighbors; i++) {
+				int a, b;
+				map->getNeighbor(x, y, i, a, b);
+				S->push(map->getVertex(a, b));
+			}
+
+		}
+	}
+
+	delete S;
+	delete V;
+	delete[] visited;
+
+	return false;
+}
+
 
 void util::getActors(GraphMap* map, int y_type, int n_type, vector<int>* allActors) {
 	int numActors = map->getNumActors();
