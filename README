@@ -82,7 +82,15 @@ SmartEnemy.cpp:
 ---------------
 SmartEnemy.cpp contains the implementation of the SmartEnemy class.
 
-The smartEnemy class has three static objects used for randomizing the enemies. Upon selecting the first move, the enemy is assigned a randomly selected personality which is later used to select the enemy's move. There are five special protected methods in SmartEnemy.cpp: getHeroes, pursue, lazyPursue, eatableGuard. eatableGuard is unused in this submission. getHeroes selects all of the remaining heroes on the map. selectNeighbor calls one of pursue or lazyPursue depending on the personality of the enemy. pursue returns the move that the enemy must take to take the shortest path to the nearest hero. lazyPursue returns a random neighbor some of the time depending on the lazyness factor, and the rest of the time calls pursue.
+The smartEnemy class has three static objects used for randomizing the enemies. Upon 
+selecting the first move, the enemy is assigned a randomly selected personality which is 
+later used to select the enemy's move. There are five special protected methods in 
+SmartEnemy.cpp: getHeroes, pursue, lazyPursue, eatableGuard. eatableGuard is unused in 
+this submission. getHeroes selects all of the remaining heroes on the map. selectNeighbor 
+calls one of pursue or lazyPursue depending on the personality of the enemy. pursue 
+returns the move that the enemy must take to take the shortest path to the nearest hero. 
+lazyPursue returns a random neighbor some of the time depending on the lazyness factor, 
+and the rest of the time calls pursue.
 
 
 SmartEnemy.hpp:
@@ -128,7 +136,15 @@ ActorUtil.cpp:
 ---------------
 ActorUtil.cpp contains the implementation of the ActorUtil functions.
 
-The util namespace contains functions useful for any of the actors. There are three different overloaded versions of findPath. The first of which simply selects the fastest path from the start to the end vertex. The second finds the shortest path that doesn't cross a vertex containing an actor with the avoidtype. The third is similar to the second, but checks within a given radius. The searchAll function searches the entire graph using a non-recursive depth-first search and returns true if an actor of the given searchtype is found. The searchRadius uses a depth-limited search to the given depth and returns true if an actor with the searchtype is found within the radius. The searchRadiusRec is the recursive part of this function.
+The util namespace contains functions useful for any of the actors. There are three 
+different overloaded versions of findPath. The first of which simply selects the fastest 
+path from the start to the end vertex. The second finds the shortest path that doesn't 
+cross a vertex containing an actor with the avoidtype. The third is similar to the second, 
+but checks within a given radius. The searchAll function searches the entire graph using a 
+non-recursive depth-first search and returns true if an actor of the given searchtype is 
+found. The searchRadius uses a depth-limited search to the given depth and returns true if 
+an actor with the searchtype is found within the radius. The searchRadiusRec is the 
+recursive part of this function.
 
 
 ActorUtil.hpp:
