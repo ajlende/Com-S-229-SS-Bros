@@ -1,6 +1,6 @@
 ===========================================
 |                                         |
-|      Project 2A                         |
+|      Project 2B                         |
 |      Super Stolee Bros (PAC++MAN)       |
 |                                         |
 |      Alex Lende                         |
@@ -19,25 +19,26 @@ eatables can be reached from and eats that instead.
 
 SmartEnemy Strategy
 ===========================================
-Smartenemy does not yet exist...but when it does...
-
-All of the stuff about it will be here.
+Smartenemy employs multiple strategies to eat all of the heroes in a map. During 
+creation, each of the enemies is given a random number that represents their 
+"personality." The two personalities that the enemies can have are the "Pursuer" 
+and the "Lazy Pursuer." The Pursuer simply takes the shortest path to the nearest 
+hero. The Lazy Pursuer will randomly move about the map some of the time, and will 
+pursue the nearest hero the rest of the time.
 
 
 
 SmartPowerup Strategy
 ===========================================
-Smartpowerup does not yet exist...but when it does...
-
-All of the stuff about it will be here.
+Smartpowerup simply takes the shortest path to the neatest enemy that it can that 
+does not cross a hero. 
 
 
 
 SmartHero Strategy
 ===========================================
-Smarthero does not yet exist...but when it does...
-
-All of the stuff about it will be here.
+Smarthero simply takes the shortest path to the nearest eatable that it can that does 
+not cross an enemy.
 
 
 
@@ -61,20 +62,80 @@ The Makefile contained in the project contains three sections as described below
                      submission.
 
 
-simplehero.cpp:
+SimpleHero.cpp:
 ---------------
 simplehero.cpp contains the implementation of the SimpleHero class.
 
-Additional private methods created were findPath and getEatables which found a
-path to the specified vertex and created a list of all of the remaining eatables
-on the map. Additional information and descriptions can be found in simplehero.hpp.
+One additional private method created was called getEatables which created a list of all 
+of the remaining eatables on the map. Additional information and descriptions can be 
+found in SimpleHero.cpp.
 
 
-simplehero.hpp:
+SimpleHero.hpp:
 ---------------
 simplehero.hpp contains the class definition for the simplehero class.
 
-See simplehero.hpp for additional details on methods.
+See SimpleHero.hpp for additional details on methods.
+
+
+SmartEnemy.cpp:
+---------------
+SmartEnemy.cpp contains the implementation of the SmartEnemy class.
+
+The smartEnemy class has three static objects used for randomizing the enemies. Upon selecting the first move, the enemy is assigned a randomly selected personality which is later used to select the enemy's move. There are five special protected methods in SmartEnemy.cpp: getHeroes, pursue, lazyPursue, eatableGuard. eatableGuard is unused in this submission. getHeroes selects all of the remaining heroes on the map. selectNeighbor calls one of pursue or lazyPursue depending on the personality of the enemy. pursue returns the move that the enemy must take to take the shortest path to the nearest hero. lazyPursue returns a random neighbor some of the time depending on the lazyness factor, and the rest of the time calls pursue.
+
+
+SmartEnemy.hpp:
+---------------
+SmartEnemy.hpp contains the class definition for the SmartEnemy class.
+
+See SmartEnemy.hpp for additional details on methods.
+
+
+SmartPowerup.cpp:
+---------------
+SmartPowerup.cpp contains the implementation of the SmartPowerup class.
+
+SmartPowerup has one additional protected method, getEnemies, which found a
+path to the specified vertex and created a list of all of the remaining ebemies
+on the map. Additional information and descriptions can be found in simplehero.hpp.
+
+
+SmartPowerup.hpp:
+---------------
+SmartPowerup.hpp contains the class definition for the SmartPowerup class.
+
+See SmartPowerup.hpp for additional details on methods.
+
+
+SmartHero.cpp:
+---------------
+SmartHero.cpp contains the implementation of the SmartHero class.
+
+One additional private method created was called getEatables which created a list of all 
+of the remaining eatables on the map. Additional information and descriptions can be 
+found in SmartHero.cpp.
+
+
+SmartHero.hpp:
+---------------
+SmartHero.hpp contains the class definition for the SmartHero class.
+
+See SmartHero.hpp for additional details on methods.
+
+
+ActorUtil.cpp:
+---------------
+ActorUtil.cpp contains the implementation of the ActorUtil functions.
+
+The util namespace contains functions useful for any of the actors. There are three different overloaded versions of findPath. The first of which simply selects the fastest path from the start to the end vertex. The second finds the shortest path that doesn't cross a vertex containing an actor with the avoidtype. The third is similar to the second, but checks within a given radius. The searchAll function searches the entire graph using a non-recursive depth-first search and returns true if an actor of the given searchtype is found. The searchRadius uses a depth-limited search to the given depth and returns true if an actor with the searchtype is found within the radius. The searchRadiusRec is the recursive part of this function.
+
+
+ActorUtil.hpp:
+---------------
+ActorUtil.hpp contains the function prototypes in the util namespace for ActorUtil.cpp.
+
+See ActorUtil.hpp for additional details on methods.
 
 
 ssbros.cpp:
@@ -89,3 +150,7 @@ ssbros includes some additional command line arguments that are available.
 
 -t, --timer
 	Times how long it takes for the program to execute.
+
+-h, --help
+	Prints a help message detailing the usage of the program.
+
